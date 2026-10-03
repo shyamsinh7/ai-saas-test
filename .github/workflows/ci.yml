@@ -1,0 +1,1 @@
+{"name": "CI", "on": ["pull_request"], "jobs": {"changelog": {"name": "CHANGELOG.md needs an entry for this change", "runs-on": "ubuntu-latest", "steps": [{"uses": "actions/checkout@v4"}, {"run": "grep -qE '^## ' CHANGELOG.md || { echo '::error::Add a ## entry to CHANGELOG.md describing this change'; exit 1; }"}]}}}
