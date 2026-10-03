@@ -44,6 +44,14 @@
       color: #333;
       overflow-wrap: anywhere;
     }
+    #error {
+      margin-top: 1rem;
+      color: #d32f2f;
+      font-size: 0.95rem;
+    }
+    #error:empty {
+      display: none;
+    }
   </style>
 </head>
 <body>
@@ -52,22 +60,28 @@
     <input id="name" name="name" type="text" autocomplete="name">
     <button type="submit">Greet</button>
   </form>
+  <p id="error" role="alert"></p>
   <p id="greeting"></p>
 
   <script type="module">
     import { greet } from './greeting.js';
 
+    const ERROR_MESSAGE = 'Please enter your name.';
+
     const form = document.getElementById('greet-form');
     const nameInput = document.getElementById('name');
     const greetingEl = document.getElementById('greeting');
+    const errorEl = document.getElementById('error');
 
     form.addEventListener('submit', (event) => {
       event.preventDefault();
       const result = greet(nameInput.value);
       if (result.ok) {
+        errorEl.textContent = '';
         greetingEl.textContent = result.message;
       } else {
         greetingEl.textContent = '';
+        errorEl.textContent = ERROR_MESSAGE;
       }
     });
   </script>
