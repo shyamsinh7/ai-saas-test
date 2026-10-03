@@ -1,0 +1,8 @@
+{
+  "name": "ai-dev-sandbox",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test": "node --test"
+  }
+}
