@@ -1,5 +1,8 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
+import { mkdtempSync, readFileSync } from 'node:fs';
+import { tmpdir } from 'node:os';
+import { join } from 'node:path';
 import { greet } from './greeting.js';
 
 const EMPTY = { ok: false, error: 'empty' };
@@ -35,4 +38,19 @@ test('very long and unicode names work', () => {
   const long = 'a'.repeat(10000);
   assert.equal(greet(long).message, `Hello, ${long}!`);
   assert.equal(greet('José 😀').message, 'Hello, José 😀!');
+});
+
+test('visit log gets trimmed names for successful greets only', () => {
+  const file = join(mkdtempSync(join(tmpdir(), 'visits-')), 'visits.log');
+  process.env.VISIT_LOG = file;
+  greet('  Ada  ');
+  greet('   ');
+  greet(null);
+  greet('Bob\nEve');
+  assert.equal(readFileSync(file, 'utf8'), 'Ada\nBob Eve\n');
+});
+
+test('logging failure does not break greet', () => {
+  process.env.VISIT_LOG = join(tmpdir(), 'no-such-dir-xyz', 'a', 'v.log');
+  assert.deepEqual(greet('Ada'), { ok: true, message: 'Hello, Ada!' });
 });

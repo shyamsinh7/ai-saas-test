@@ -1,10 +1,13 @@
 // Node's fs is loaded only when running under Node, so this module still
 // imports cleanly in browsers (index.html).
-const fs = typeof process !== 'undefined' && process.versions?.node
-  ? await import('node:fs')
-  : null;
+const isNode = typeof process !== 'undefined' && process.versions?.node;
+const fs = isNode ? await import('node:fs') : null;
+const os = isNode ? await import('node:os') : null;
+const path = isNode ? await import('node:path') : null;
 
-const VISIT_LOG = '/tmp/visits.log';
+// Log location: VISIT_LOG env var, else visits.log in the OS temp directory.
+const visitLog = () =>
+  process.env.VISIT_LOG || path.join(os.tmpdir(), 'visits.log');
 
 // Pure greeting logic; works in Node and in browsers via ES module import.
 // Returns plain text (no HTML escaping); callers should render with textContent.
@@ -16,7 +19,7 @@ export function greet(name) {
   if (fs) {
     try {
       // Collapse line breaks so one visit is always exactly one log line.
-      fs.appendFileSync(VISIT_LOG, trimmed.replace(/[\r\n]+/g, ' ') + '\n');
+      fs.appendFileSync(visitLog(), trimmed.replace(/[\r\n]+/g, ' ') + '\n');
     } catch {
       // Logging must never break greeting.
     }
