@@ -1,0 +1,26 @@
+name: Deploy staging
+# Started by the AI SaaS platform after an agent's pull request merges (docs/STAGING.md).
+on:
+  workflow_dispatch:
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+# One deployment at a time. A newer one replaces one still waiting, which then reports cancelled.
+concurrency:
+  group: staging
+  cancel-in-progress: false
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: .
+      - id: deployment
+        uses: actions/deploy-pages@v4
