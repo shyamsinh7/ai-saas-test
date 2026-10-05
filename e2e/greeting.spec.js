@@ -3,7 +3,7 @@ import { test, expect } from '@playwright/test';
 const ERROR = 'Please enter your name.';
 
 test.beforeEach(async ({ page }) => {
-  await page.goto('/');
+  await page.goto('./');
 });
 
 test('clicking Greet shows the greeting', async ({ page }) => {
