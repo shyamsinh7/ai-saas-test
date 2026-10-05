@@ -50,3 +50,11 @@ test('HTML in the name is shown as literal text', async ({ page }) => {
   await expect(page.locator('img')).toHaveCount(0);
   expect(dialog).toBe(false);
 });
+
+test('footer below the form shows the current year', async ({ page }) => {
+  const footer = page.locator('footer');
+  await expect(footer).toHaveText(`© ${new Date().getFullYear()} Greeting`);
+  const form = await page.locator('#greet-form').boundingBox();
+  const foot = await footer.boundingBox();
+  expect(foot.y).toBeGreaterThan(form.y + form.height);
+});
