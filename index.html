@@ -52,6 +52,11 @@
       color: #333;
       overflow-wrap: anywhere;
     }
+    footer {
+      margin-top: 2rem;
+      color: #666;
+      font-size: 0.875rem;
+    }
   </style>
 </head>
 <body>
@@ -62,6 +67,7 @@
   </form>
   <p id="error" role="alert"></p>
   <p id="greeting"></p>
+  <footer id="footer"></footer>
 
   <script type="module">
     import { greet } from './greeting.js';
@@ -70,6 +76,7 @@
     const nameInput = document.getElementById('name');
     const greetingEl = document.getElementById('greeting');
     const errorEl = document.getElementById('error');
+    document.getElementById('footer').textContent = `© ${new Date().getFullYear()} Greeting`;
     const ERROR_MESSAGE = 'Please enter your name.';
 
     form.addEventListener('submit', (event) => {
