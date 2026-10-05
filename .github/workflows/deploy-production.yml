@@ -1,0 +1,22 @@
+name: Deploy production
+# Started by the AI SaaS platform when an admin releases a validated staging deployment
+# (docs/STAGING.md). This test project hosts nothing in production: a release is a GitHub Release
+# of the deployed commit.
+on:
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency:
+  group: production
+  cancel-in-progress: false
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Publish a GitHub Release of this commit
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          tag="prod-$(date -u +%Y%m%d-%H%M%S)-${GITHUB_SHA::7}"
+          gh release create "$tag" --repo "$GITHUB_REPOSITORY" --target "$GITHUB_SHA" \
+            --title "Production $tag" --generate-notes
