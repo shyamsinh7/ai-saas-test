@@ -52,3 +52,15 @@ The specs live in `e2e/*.spec.js`, so `npm test` (`node --test`) still runs only
 - `e2e/greeting.spec.js` – Playwright end-to-end tests for the page
 - `playwright.config.js` – Playwright configuration
 - `hello.js` – the Node.js hello script (see Usage)
+
+## Hello Dev (TypeScript)
+
+`src/index.ts` prints `Hello Dev`. Requires Node.js 18+ and `npm install` (installs TypeScript).
+
+```
+npm install
+npm run build   # compiles src/ to dist/ using tsconfig.json
+npm start       # runs dist/index.js -> prints "Hello Dev"
+```
+
+`npm run dev` builds and runs in one step.
