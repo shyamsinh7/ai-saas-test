@@ -11,7 +11,7 @@ It prints `Hello from AI agents` and exits with code 0.
 
 ## Greeting page
 
-`index.html` is a static page with a name field and a **Greet** button. Entering a name shows `Hello, <name>!`; an empty or whitespace-only name shows an inline error. The page loads `greeting.js` as an ES module (`<script type="module">`), so no build step is needed. A modern browser with ES module support is required.
+`index.html` is a static page with a name field and a **Greet** button. Entering a name shows `Hello, <name>!`; an empty or whitespace-only name shows an inline error. The name field accepts at most 50 characters, and a line under it shows the current count (for example `3 / 50 characters`), updating as you type. The page loads `greeting.js` as an ES module (`<script type="module">`), so no build step is needed. A modern browser with ES module support is required.
 
 ### Serve and open
 
