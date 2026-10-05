@@ -58,3 +58,19 @@ test('footer below the form shows the current year', async ({ page }) => {
   const foot = await footer.boundingBox();
   expect(foot.y).toBeGreaterThan(form.y + form.height);
 });
+
+test('character count starts at 0 and updates as the user types', async ({ page }) => {
+  const count = page.locator('#name-count');
+  await expect(count).toHaveText('0 / 50 characters');
+  await page.getByLabel('Your name').pressSequentially('Ada');
+  await expect(count).toHaveText('3 / 50 characters');
+});
+
+test('name field accepts at most 50 characters', async ({ page }) => {
+  const input = page.getByLabel('Your name');
+  await expect(input).toHaveAttribute('maxlength', '50');
+  await input.click();
+  await page.keyboard.type('a'.repeat(60));
+  await expect(input).toHaveValue('a'.repeat(50));
+  await expect(page.locator('#name-count')).toHaveText('50 / 50 characters');
+});

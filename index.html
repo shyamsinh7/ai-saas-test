@@ -52,6 +52,10 @@
       color: #333;
       overflow-wrap: anywhere;
     }
+    #name-count {
+      color: #666;
+      margin-top: -0.5rem;
+    }
     footer {
       margin-top: 2rem;
       color: #666;
@@ -62,7 +66,8 @@
 <body>
   <form id="greet-form">
     <label for="name">Your name</label>
-    <input id="name" name="name" type="text" autocomplete="name">
+    <input id="name" name="name" type="text" autocomplete="name" maxlength="50" aria-describedby="name-count">
+    <small id="name-count">0 / 50 characters</small>
     <button type="submit">Greet</button>
   </form>
   <p id="error" role="alert"></p>
@@ -77,6 +82,12 @@
     const greetingEl = document.getElementById('greeting');
     const errorEl = document.getElementById('error');
     document.getElementById('footer').textContent = `© ${new Date().getFullYear()} Greeting`;
+    const countEl = document.getElementById('name-count');
+    const updateCount = () => {
+      countEl.textContent = `${nameInput.value.length} / ${nameInput.maxLength} characters`;
+    };
+    nameInput.addEventListener('input', updateCount);
+    updateCount();
     const ERROR_MESSAGE = 'Please enter your name.';
 
     form.addEventListener('submit', (event) => {
@@ -85,13 +96,13 @@
       if (result.ok) {
         errorEl.textContent = '';
         nameInput.removeAttribute('aria-invalid');
-        nameInput.removeAttribute('aria-describedby');
+        nameInput.setAttribute('aria-describedby', 'name-count');
         greetingEl.textContent = result.message;
       } else {
         greetingEl.textContent = '';
         errorEl.textContent = ERROR_MESSAGE;
         nameInput.setAttribute('aria-invalid', 'true');
-        nameInput.setAttribute('aria-describedby', 'error');
+        nameInput.setAttribute('aria-describedby', 'error name-count');
         nameInput.focus();
       }
     });
