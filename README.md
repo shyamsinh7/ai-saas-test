@@ -33,12 +33,24 @@ node --test
 
 (or `npm test`). It discovers `greeting.test.js` and exits 0 when all tests pass.
 
+## End-to-end tests
+
+Playwright (Chromium only) drives `index.html` in a real browser. The config starts `python3 -m http.server 4173` itself. Install dependencies once with `npm install`, then run:
+
+```
+npx playwright install chromium && npx playwright test
+```
+
+The specs live in `e2e/*.spec.js`, so `npm test` (`node --test`) still runs only the unit tests.
+
 ## Files
 
 - `index.html` – the greeting page
 - `greeting.js` – greeting logic (ES module shared by the page and tests)
 - `greeting.test.js` – tests for `greeting.js`
 - `package.json` – sets `"type": "module"`, the `test` script and the Node engine range
+- `e2e/greeting.spec.js` – Playwright end-to-end tests for the page
+- `playwright.config.js` – Playwright configuration
 - `hello.js` – the Node.js hello script (see Usage)
 
 ## Hello Dev (TypeScript)
