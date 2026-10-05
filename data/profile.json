@@ -1,0 +1,216 @@
+{
+  "name": "Shyamsinh Parmar",
+  "title": "Principal Engineer & Enterprise Architect",
+  "description": "Personal profile of Shyamsinh Parmar: Backend & AI Architect with 8+ years of experience.",
+  "contacts": [
+    {
+      "label": "Email",
+      "value": "parmarshyamsingh8@gmail.com",
+      "href": "mailto:parmarshyamsingh8@gmail.com"
+    },
+    {
+      "label": "Phone",
+      "value": "+91 8866060908",
+      "href": "tel:+918866060908"
+    },
+    {
+      "label": "GitHub",
+      "value": "ssparmar8",
+      "href": "https://github.com/ssparmar8"
+    },
+    {
+      "label": "LinkedIn",
+      "value": "Shyamsinh Parmar"
+    },
+    {
+      "label": "Upwork",
+      "value": "Shyamsinh Parmar"
+    },
+    {
+      "label": "Fiverr",
+      "value": "ssparmar8"
+    }
+  ],
+  "about": {
+    "summary": "I am a highly skilled Backend & AI Architect with over 8 years of experience designing and implementing scalable, high-performance systems that drive business growth and automation.",
+    "highlights": [
+      {
+        "title": "AI & NLP-powered Chatbots",
+        "text": "automating customer engagement with advanced AI-driven conversations."
+      },
+      {
+        "title": "Scalable Cloud Architecture",
+        "text": "resilient, high-availability systems with AWS, microservices, and DevOps best practices."
+      },
+      {
+        "title": "Backend Optimization",
+        "text": "speed, security, and reliability in backend development."
+      },
+      {
+        "title": "Twilio & API Integrations",
+        "text": "seamless voice, messaging, and chatbot solutions."
+      }
+    ]
+  },
+  "skills": [
+    {
+      "category": "Languages",
+      "items": ["Python", "JavaScript", "Node.js", "PHP"]
+    },
+    {
+      "category": "AI & LLMs",
+      "items": [
+        "OpenAI, Anthropic Claude, Google Gemini",
+        "Meta Llama, Mistral AI, Hugging Face",
+        "RAG, AI Agents, Prompt Engineering"
+      ]
+    },
+    {
+      "category": "AI Frameworks",
+      "items": ["LangChain, LangGraph, LlamaIndex", "CrewAI, AutoGen, OpenAI Agents SDK"]
+    },
+    {
+      "category": "Backend & Frontend",
+      "items": ["FastAPI, Flask, Express.js, NestJS", "React.js, Next.js, Angular"]
+    },
+    {
+      "category": "Data",
+      "items": ["PostgreSQL, MongoDB, MySQL, Redis", "Pinecone, Weaviate, ChromaDB, FAISS"]
+    },
+    {
+      "category": "Cloud & DevOps",
+      "items": ["AWS, Docker, Nginx, Linux", "GitHub Actions, GitLab CI/CD"]
+    },
+    {
+      "category": "Integrations",
+      "items": ["REST, GraphQL, Webhooks, WebSockets", "Twilio, WhatsApp, Telegram, Slack"]
+    },
+    {
+      "category": "Chatbot Platforms",
+      "items": ["Botpress, Dialogflow, Amazon Lex", "RASA, Landbot"]
+    }
+  ],
+  "portfolio": [
+    {
+      "name": "HWS (Health Wealth Safe)",
+      "description": "Healthcare platform for patient records, EMR, billing, chat and video consultations.",
+      "url": "https://www.healthwealthsafe.com/",
+      "urlLabel": "healthwealthsafe.com"
+    },
+    {
+      "name": "FrontDesk Clinic",
+      "description": "AI-powered healthcare automation: scheduling, reminders, insurance verification and a virtual assistant.",
+      "url": "https://frontdesk.clinic/",
+      "urlLabel": "frontdesk.clinic"
+    },
+    {
+      "name": "VetWise",
+      "description": "24/7 virtual veterinary consultations across Canada with simple 3-step booking.",
+      "url": "https://getvetwise.com/",
+      "urlLabel": "getvetwise.com"
+    },
+    {
+      "name": "AIVA Chat",
+      "description": "Platform to create AI voice chatbots and embeddable chat widgets, with call recordings and analytics.",
+      "url": "https://aivachat.io/",
+      "urlLabel": "aivachat.io"
+    },
+    {
+      "name": "Stockly",
+      "description": "AI-powered stock market platform with real-time data and a social investing community."
+    },
+    {
+      "name": "Quick Hub",
+      "description": "Online reputation management with AI review insights, campaigns and WhatsApp automation.",
+      "url": "https://www.quickhub.ai/",
+      "urlLabel": "quickhub.ai"
+    },
+    {
+      "name": "Hcomb",
+      "description": "AI-driven hiring and training platform with AI-powered interviews.",
+      "url": "https://www.hcomb.ai/",
+      "urlLabel": "hcomb.ai"
+    },
+    {
+      "name": "Incorporight",
+      "description": "Secure corporate information management with blockchain-backed records.",
+      "url": "https://corprite.co/",
+      "urlLabel": "corprite.co"
+    },
+    {
+      "name": "Krone",
+      "description": "Compliance and consulting platform with an AI assistant.",
+      "url": "https://www.krone.one/",
+      "urlLabel": "krone.one"
+    },
+    {
+      "name": "AdvancedCare",
+      "description": "AI-powered EHR with telehealth and insurance claims processing.",
+      "url": "https://advancedcare.com/",
+      "urlLabel": "advancedcare.com"
+    },
+    {
+      "name": "PCO Intelligence",
+      "description": "Amazon Lex and Amazon Connect customer support automation with custom widgets.",
+      "url": "https://pcointelligence.com/",
+      "urlLabel": "pcointelligence.com"
+    },
+    {
+      "name": "YellowPad AI",
+      "description": "AI-powered legal document drafting with intelligent templates.",
+      "url": "https://www.yellowpad.ai/",
+      "urlLabel": "yellowpad.ai"
+    },
+    {
+      "name": "Sydon AI",
+      "description": "AI platform for Amazon sellers: account health, profit, competitor analysis and outreach automation.",
+      "url": "https://sydon.ai/",
+      "urlLabel": "sydon.ai"
+    },
+    {
+      "name": "Goodfin AI",
+      "description": "AI financial advisor with conversational budgeting and investment guidance.",
+      "url": "https://www.goodfin.com/",
+      "urlLabel": "goodfin.com"
+    },
+    {
+      "name": "Lalo",
+      "description": "ChatGPT API integration: a free AI obituary writer.",
+      "url": "https://www.lalo.app/",
+      "urlLabel": "lalo.app"
+    },
+    {
+      "name": "Reknew AI",
+      "description": "Enterprise data modernization, AI adoption and intelligent automation.",
+      "url": "https://reknew.ai/",
+      "urlLabel": "reknew.ai"
+    },
+    {
+      "name": "OmniAI Chatbot",
+      "description": "Unified inbox for WhatsApp, Instagram and email with AI replies and Shopify integration.",
+      "url": "https://omniaichatbot.com/",
+      "urlLabel": "omniaichatbot.com"
+    },
+    {
+      "name": "ServiceNow Dashboard",
+      "description": "Real-time KPI dashboards and automated reporting.",
+      "url": "https://www.servicenow.com/",
+      "urlLabel": "servicenow.com"
+    },
+    {
+      "name": "Landbot ChatBot",
+      "description": "Therapist-matching and appointment-booking chatbot with Asana and Zapier integration.",
+      "url": "https://www.flourishtogethertherapy.com/",
+      "urlLabel": "flourishtogethertherapy.com"
+    }
+  ],
+  "why": [
+    "8+ years of industry experience",
+    "Expert in AI, backend engineering, and cloud solutions",
+    "Proven track record of delivering scalable and innovative solutions",
+    "Hands-on expertise in AI-driven automation and backend optimizations",
+    "Strong portfolio of healthcare, legal, hiring, and compliance platforms",
+    "Deep understanding of cloud architectures, security, and API integrations",
+    "Proficient in DevOps practices, CI/CD pipelines, and system monitoring"
+  ]
+}

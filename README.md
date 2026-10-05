@@ -1,66 +1,52 @@
-# ai-saas-test
-## Usage
+# Profile site
 
-Run the hello script with Node.js:
+A single-page personal profile (name, title, contact links, About Me, Core Skills & Technologies,
+My Portfolio) with a small Express backend and a Vite + TypeScript frontend.
 
-```
-node hello.js
-```
-
-It prints `Hello from AI agents` and exits with code 0.
-
-## Greeting page
-
-`index.html` is a static page with a name field and a **Greet** button. Entering a name shows `Hello, <name>!`; an empty or whitespace-only name shows an inline error. The name field accepts at most 50 characters, and a line under it shows the current count (for example `3 / 50 characters`), updating as you type. The page loads `greeting.js` as an ES module (`<script type="module">`), so no build step is needed. A modern browser with ES module support is required.
-
-### Serve and open
-
-ES modules are blocked when a page is opened via `file://`, so double-clicking `index.html` is not supported. Serve the repo root with any static server, for example:
+## Structure
 
 ```
-python3 -m http.server 8000
+data/profile.json     Single source of the profile content
+backend/src/          Express app (TypeScript): /api/health, /api/profile, serves dist/
+frontend/             Vite + TypeScript page that renders the profile (no UI framework)
+e2e/                  Playwright end-to-end tests
+dist/                 Build output (generated, git-ignored)
 ```
 
-Then open <http://localhost:8000/>.
+- `GET /api/health` returns `{"status":"ok"}`.
+- `GET /api/profile` returns `data/profile.json`, validated against the zod schema in
+  `backend/src/schema.ts` (HTTP 500 if it is invalid).
+- The frontend fetches `api/profile` when a backend serves it and otherwise falls back to the copy
+  of `profile.json` bundled at build time, so the same build works on static hosting.
 
-## Tests
+To change the content, edit `data/profile.json`.
 
-Requires Node.js 18 or newer (tested on v24). No dependencies to install. From the repo root run:
+## npm scripts
 
-```
-node --test
-```
+| Script              | What it does                                                             |
+| ------------------- | ------------------------------------------------------------------------ |
+| `npm start`         | Builds the frontend, then serves site + API on one port (3000, `PORT`)   |
+| `npm run dev`       | Vite dev server for the frontend (bundled data; run `npm start` for API) |
+| `npm run build`     | Writes the static site to `dist/` (relative asset paths)                 |
+| `npm test`          | Backend and frontend unit tests (Vitest)                                 |
+| `npm run e2e`       | Playwright tests (same as `npx playwright test`)                         |
+| `npm run typecheck` | TypeScript strict-mode check of the whole repository                     |
+| `npm run lint`      | ESLint + Prettier check; `npm run format` fixes formatting               |
 
-(or `npm test`). It discovers `greeting.test.js` and exits 0 when all tests pass.
+## Run locally
 
-## End-to-end tests
-
-Playwright (Chromium only) drives `index.html` in a real browser. The config starts `python3 -m http.server 4173` itself. Install dependencies once with `npm install`, then run:
-
-```
-npx playwright install chromium && npx playwright test
-```
-
-The specs live in `e2e/*.spec.js`, so `npm test` (`node --test`) still runs only the unit tests.
-
-## Files
-
-- `index.html` – the greeting page
-- `greeting.js` – greeting logic (ES module shared by the page and tests)
-- `greeting.test.js` – tests for `greeting.js`
-- `package.json` – sets `"type": "module"`, the `test` script and the Node engine range
-- `e2e/greeting.spec.js` – Playwright end-to-end tests for the page
-- `playwright.config.js` – Playwright configuration
-- `hello.js` – the Node.js hello script (see Usage)
-
-## Hello Dev (TypeScript)
-
-`src/index.ts` prints `Hello Dev`. Requires Node.js 18+ and `npm install` (installs TypeScript).
-
-```
+```sh
 npm install
-npm run build   # compiles src/ to dist/ using tsconfig.json
-npm start       # runs dist/index.js -> prints "Hello Dev"
+npm start            # http://localhost:3000   (PORT=8080 npm start to change the port)
 ```
 
-`npm run dev` builds and runs in one step.
+End-to-end tests need Playwright's browser once: `npx playwright install chromium`. Then
+`npx playwright test` starts the site itself; set `BASE_URL` (e.g.
+`BASE_URL=https://shyamsinh7.github.io/ai-saas-test/ npx playwright test`) to smoke-test an
+already deployed site instead.
+
+## Deployment
+
+The site is published as static files to GitHub Pages at
+https://shyamsinh7.github.io/ai-saas-test/. The deploy workflows run `npm run build` and publish
+`dist/`. There is no backend on GitHub Pages; the page uses the profile data bundled at build time.
