@@ -111,11 +111,19 @@ function renderPortfolio(profile: Profile): HTMLElement {
   const cards = profile.portfolio.map((p) => {
     const card = el(
       'article',
-      { class: 'card project' },
+      { class: 'card project', 'data-category': p.category },
       el('h3', {}, p.name),
-      el('p', {}, p.description),
+      el('span', { class: 'badge' }, p.category),
+      el('p', { class: 'summary' }, p.summary),
+      el('ul', { class: 'tags' }, ...p.tags.map((t) => el('li', {}, t))),
     );
-    if (p.url) card.append(link(p.url, p.urlLabel ?? p.url));
+    if (p.url) {
+      const label = p.urlLabel ?? p.url;
+      const a = link(p.url, label);
+      // Keep the visible text inside the accessible name (WCAG 2.5.3) while naming the project.
+      if (!label.includes(p.name)) a.setAttribute('aria-label', `${p.name} – ${label}`);
+      card.append(a);
+    }
     return card;
   });
   const count = profile.portfolio.length;
