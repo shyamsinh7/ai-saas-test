@@ -2,7 +2,7 @@
 import { beforeEach, describe, expect, it } from 'vitest';
 import profile from '../../data/profile.json';
 import { parseProfile } from '../../backend/src/schema';
-import { renderProfile } from './render';
+import { formatUpdatedAt, renderProfile } from './render';
 
 const data = parseProfile(profile);
 let root: HTMLElement;
@@ -76,7 +76,7 @@ describe('renderProfile', () => {
   it('renders the closing sections and a footer with the year', () => {
     expect(root.querySelectorAll('#why li')).toHaveLength(data.why.length);
     expect(root.querySelector('#links a[href^="mailto:"]')).not.toBeNull();
-    expect(root.querySelector('footer')?.textContent).toBe('© 2030 Shyamsinh Parmar');
+    expect(root.querySelector('footer .copyright')?.textContent).toBe('© 2030 Shyamsinh Parmar');
   });
 
   it('labels each section by its heading and offers a skip link', () => {
@@ -92,5 +92,29 @@ describe('renderProfile', () => {
     renderProfile(root, { ...data, name: '<img src=x onerror=alert(1)>' });
     expect(root.querySelector('img')).toBeNull();
     expect(root.querySelector('h1')?.textContent).toBe('<img src=x onerror=alert(1)>');
+  });
+});
+
+describe('footer last-updated date', () => {
+  it('formats an ISO date in English', () => {
+    expect(formatUpdatedAt('2026-10-06')).toBe('6 October 2026');
+    expect(formatUpdatedAt('2026-01-31')).toBe('31 January 2026');
+  });
+
+  it('shows the formatted date in the footer', () => {
+    expect(root.querySelector('footer .updated')?.textContent).toBe('Last updated: 6 October 2026');
+  });
+
+  it('returns nothing for a missing or invalid date', () => {
+    expect(formatUpdatedAt(undefined)).toBeUndefined();
+    expect(formatUpdatedAt('')).toBeUndefined();
+    expect(formatUpdatedAt('2026-13-45')).toBeUndefined();
+    expect(formatUpdatedAt('soon')).toBeUndefined();
+  });
+
+  it('renders no date and does not break without updatedAt', () => {
+    renderProfile(root, { ...data, updatedAt: undefined }, 2030);
+    expect(root.querySelector('footer .updated')).toBeNull();
+    expect(root.querySelector('footer')?.textContent).toBe('© 2030 Shyamsinh Parmar');
   });
 });

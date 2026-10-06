@@ -53,7 +53,13 @@ test('My Portfolio section lists the projects with links', async ({ page }) => {
 });
 
 test('footer shows the current year', async ({ page }) => {
-  await expect(page.locator('footer')).toHaveText(`© ${new Date().getFullYear()} Shyamsinh Parmar`);
+  await expect(page.locator('footer .copyright')).toHaveText(
+    `© ${new Date().getFullYear()} Shyamsinh Parmar`,
+  );
+});
+
+test('footer shows when the profile was last updated', async ({ page }) => {
+  await expect(page.locator('footer .updated')).toHaveText('Last updated: 6 October 2026');
 });
 
 test('nothing of the greeting app remains', async ({ page }) => {

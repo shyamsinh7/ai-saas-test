@@ -115,6 +115,10 @@ footer {
   font-size: 0.875rem;
 }
 
+footer .updated {
+  display: block;
+}
+
 html {
   scroll-behavior: smooth;
 }
