@@ -74,3 +74,29 @@ describe('renderProfile', () => {
     expect(root.querySelector('h1')?.textContent).toBe('<img src=x onerror=alert(1)>');
   });
 });
+
+describe('portfolio heading count', () => {
+  const heading = (n: number) => {
+    const project = { name: 'n', description: 'd' };
+    renderProfile(root, { ...data, portfolio: Array(n).fill(project) }, 2030);
+    return root.querySelector('#portfolio h2')?.textContent;
+  };
+
+  it('shows no count when there are no projects', () => {
+    expect(heading(0)).toBe('My Portfolio');
+  });
+
+  it('uses the singular for one project', () => {
+    expect(heading(1)).toBe('My Portfolio (1 project)');
+  });
+
+  it('uses the plural for several projects', () => {
+    expect(heading(6)).toBe('My Portfolio (6 projects)');
+    expect(root.querySelector('#portfolio h2')?.textContent).toBe('My Portfolio (6 projects)');
+  });
+
+  it('counts the projects in the profile data', () => {
+    renderProfile(root, data, 2030);
+    expect(root.querySelector('#portfolio h2')?.textContent).toBe('My Portfolio (19 projects)');
+  });
+});

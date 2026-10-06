@@ -65,6 +65,11 @@ function renderSkills(profile: Profile): HTMLElement {
   return section('skills', 'Core Skills & Technologies', el('div', { class: 'grid' }, ...cards));
 }
 
+function portfolioHeading(count: number): string {
+  if (count === 0) return 'My Portfolio';
+  return `My Portfolio (${count} ${count === 1 ? 'project' : 'projects'})`;
+}
+
 function renderPortfolio(profile: Profile): HTMLElement {
   const cards = profile.portfolio.map((p) => {
     const card = el(
@@ -76,7 +81,7 @@ function renderPortfolio(profile: Profile): HTMLElement {
     if (p.url) card.append(link(p.url, p.urlLabel ?? p.url));
     return card;
   });
-  return section('portfolio', 'My Portfolio', el('div', { class: 'grid' }, ...cards));
+  return section('portfolio', portfolioHeading(profile.portfolio.length), el('div', { class: 'grid' }, ...cards));
 }
 
 function renderWhy(profile: Profile): HTMLElement {

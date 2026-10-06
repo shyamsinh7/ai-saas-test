@@ -42,7 +42,7 @@ test('Core Skills & Technologies section is shown', async ({ page }) => {
 
 test('My Portfolio section lists the projects with links', async ({ page }) => {
   const portfolio = page.locator('#portfolio');
-  await expect(portfolio.getByRole('heading', { name: 'My Portfolio' })).toBeVisible();
+  await expect(portfolio.getByRole('heading', { name: 'My Portfolio (19 projects)' })).toBeVisible();
   await expect(portfolio.locator('article')).toHaveCount(19);
   await expect(portfolio.getByRole('link', { name: 'healthwealthsafe.com' })).toHaveAttribute(
     'href',
