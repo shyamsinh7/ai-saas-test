@@ -38,6 +38,16 @@ hidden until the visitor has scrolled down more than one screen height. Clicking
 top (instantly when the visitor prefers reduced motion, smoothly otherwise) and moves keyboard focus
 to the page heading.
 
+## Skills filter
+
+A "Filter skills" search box (`frontend/src/skillsFilter.ts`) sits above the Core Skills cards.
+Typing hides the skill items that do not match and any card left with no matching items. Matching
+is a case-insensitive plain substring match on the item text, ignoring leading and trailing
+spaces, so characters such as `C++`, `.` and `(` are matched literally. Category names are not
+matched. If nothing matches, a "No skills match" message is shown (announced politely to screen
+readers). An empty or whitespace-only box shows everything again. Hidden nodes keep the `hidden`
+attribute and stay in the DOM. The filter runs in the browser only, in both API and static modes.
+
 ## npm scripts
 
 | Script              | What it does                                                             |
