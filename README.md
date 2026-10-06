@@ -22,6 +22,21 @@ dist/                 Build output (generated, git-ignored)
 
 To change the content, edit `data/profile.json`.
 
+### Portfolio projects
+
+Each entry in `portfolio` has these fields (validated by `backend/src/schema.ts`; all text is trimmed
+and must be non-empty):
+
+- `name`, `description`: required.
+- `summary`: required one-line text (aim for 100 characters or fewer).
+- `category`: required free text, one primary category per project (e.g. `AI`, `Healthcare`,
+  `Finance`, `Backend/Cloud`). Reuse existing spellings so categories do not split.
+- `tags`: required array of at least one non-empty tech tag.
+- `url`: optional http(s) link. `urlLabel`: optional link text.
+
+To add a project, append an object with all the required fields to `portfolio`. If a required field
+is missing the schema rejects the data, `GET /api/profile` returns 500 and the bundled page fails.
+
 ## Last updated date
 
 `updatedAt` in `data/profile.json` is an optional ISO date (e.g. `2026-10-06`). When present, the

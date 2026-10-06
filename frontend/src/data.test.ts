@@ -9,7 +9,7 @@ const apiProfile = {
   contacts: [{ label: 'a', value: 'b' }],
   about: { summary: 's', highlights: [] },
   skills: [{ category: 'c', items: ['i'] }],
-  portfolio: [{ name: 'n', description: 'd' }],
+  portfolio: [{ name: 'n', description: 'd', summary: 's', category: 'c', tags: ['t'] }],
   why: [],
 };
 

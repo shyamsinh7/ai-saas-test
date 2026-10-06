@@ -23,6 +23,9 @@ export const profileSchema = z.object({
       z.object({
         name: text,
         description: text,
+        summary: text,
+        category: text,
+        tags: z.array(text).min(1),
         url: z.url({ protocol: /^https?$/ }).optional(),
         urlLabel: text.optional(),
       }),
