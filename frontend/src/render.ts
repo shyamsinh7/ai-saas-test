@@ -76,7 +76,11 @@ function renderPortfolio(profile: Profile): HTMLElement {
     if (p.url) card.append(link(p.url, p.urlLabel ?? p.url));
     return card;
   });
-  return section('portfolio', 'My Portfolio', el('div', { class: 'grid' }, ...cards));
+  const count = profile.portfolio.length;
+  const heading = count
+    ? `My Portfolio (${count} ${count === 1 ? 'project' : 'projects'})`
+    : 'My Portfolio';
+  return section('portfolio', heading, el('div', { class: 'grid' }, ...cards));
 }
 
 function renderWhy(profile: Profile): HTMLElement {
