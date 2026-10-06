@@ -19,6 +19,24 @@ function link(href: string, label: string): HTMLAnchorElement {
   return el('a', attrs, label);
 }
 
+const TOC_LINKS = [
+  ['About Me', '#about'],
+  ['Core Skills', '#skills'],
+  ['My Portfolio', '#portfolio'],
+] as const;
+
+function renderToc(): HTMLElement {
+  return el(
+    'nav',
+    { class: 'toc', 'aria-label': 'Table of contents' },
+    el(
+      'ul',
+      { class: 'plain' },
+      ...TOC_LINKS.map(([label, href]) => el('li', {}, link(href, label))),
+    ),
+  );
+}
+
 function section(id: string, heading: string, ...children: Node[]): HTMLElement {
   return el(
     'section',
@@ -148,6 +166,7 @@ export function renderProfile(
   root.replaceChildren(
     el('a', { class: 'skip-link', href: '#main' }, 'Skip to content'),
     renderHeader(profile),
+    renderToc(),
     main,
     renderFooter(profile, year),
   );

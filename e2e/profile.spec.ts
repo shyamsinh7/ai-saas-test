@@ -87,3 +87,31 @@ test('Back to top button appears after scrolling and returns to the top', async 
   await expect(page.getByRole('heading', { level: 1 })).toBeFocused();
   await expect(button).toBeHidden();
 });
+
+test('table of contents links to the three sections', async ({ page }) => {
+  const toc = page.getByRole('navigation', { name: 'Table of contents' });
+  await expect(toc).toBeVisible();
+  const links = toc.getByRole('link');
+  await expect(links).toHaveText(['About Me', 'Core Skills', 'My Portfolio']);
+  await expect(links).toHaveCount(3);
+  await expect(links.nth(0)).toHaveAttribute('href', '#about');
+  await expect(links.nth(1)).toHaveAttribute('href', '#skills');
+  await expect(links.nth(2)).toHaveAttribute('href', '#portfolio');
+});
+
+test('table of contents links scroll to their sections', async ({ page }) => {
+  const toc = page.getByRole('navigation', { name: 'Table of contents' });
+  await expect(toc).toBeVisible();
+  await toc.getByRole('link', { name: 'Core Skills' }).click();
+  await expect(page).toHaveURL(/#skills$/);
+  await expect(page.locator('#skills-h')).toBeInViewport();
+  await toc.getByRole('link', { name: 'My Portfolio' }).click();
+  await expect(page).toHaveURL(/#portfolio$/);
+  await expect(page.locator('#portfolio-h')).toBeInViewport();
+});
+
+test('skip link is the first thing Tab reaches', async ({ page }) => {
+  await expect(page.getByRole('heading', { level: 1 })).toBeVisible();
+  await page.keyboard.press('Tab');
+  await expect(page.getByRole('link', { name: 'Skip to content' })).toBeFocused();
+});

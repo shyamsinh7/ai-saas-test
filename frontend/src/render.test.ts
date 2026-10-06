@@ -117,4 +117,29 @@ describe('footer last-updated date', () => {
     expect(root.querySelector('footer .updated')).toBeNull();
     expect(root.querySelector('footer')?.textContent).toBe('© 2030 Shyamsinh Parmar');
   });
+
+  describe('table of contents', () => {
+    const toc = () => root.querySelector('nav[aria-label="Table of contents"]')!;
+
+    it('sits between the header and main', () => {
+      expect(toc().previousElementSibling?.tagName).toBe('HEADER');
+      expect(toc().nextElementSibling?.tagName).toBe('MAIN');
+    });
+
+    it('links to About Me, Core Skills and My Portfolio in order', () => {
+      const links = [...toc().querySelectorAll('a')];
+      expect(links.map((a) => a.textContent)).toEqual(['About Me', 'Core Skills', 'My Portfolio']);
+      expect(links.map((a) => a.getAttribute('href'))).toEqual(['#about', '#skills', '#portfolio']);
+    });
+
+    it('points at sections that exist', () => {
+      for (const a of toc().querySelectorAll('a')) {
+        expect(root.querySelector(a.getAttribute('href')!)).not.toBeNull();
+      }
+    });
+
+    it('keeps the skip link first', () => {
+      expect(root.firstElementChild?.classList.contains('skip-link')).toBe(true);
+    });
+  });
 });
