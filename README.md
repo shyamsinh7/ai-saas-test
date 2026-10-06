@@ -21,6 +21,10 @@ dist/                 Build output (generated, git-ignored)
 
 To change the content, edit `data/profile.json`.
 
+Every email contact (a link starting with `mailto:`) gets a "Copy email address" button that copies
+the address to the clipboard and shows "Copied" for about 2 seconds (announced to screen readers).
+If the clipboard is unavailable it shows "Copy failed". The logic is in `frontend/src/copy.ts`.
+
 ## npm scripts
 
 | Script              | What it does                                                             |
