@@ -118,3 +118,19 @@ describe('footer last-updated date', () => {
     expect(root.querySelector('footer')?.textContent).toBe('© 2030 Shyamsinh Parmar');
   });
 });
+
+describe('skills filter markup', () => {
+  it('renders a labelled search input before the grid and a hidden empty message', () => {
+    const section = root.querySelector('#skills')!;
+    const label = section.querySelector<HTMLLabelElement>('label[for="skills-filter-input"]')!;
+    expect(label.textContent).toBe('Filter skills');
+    const input = section.querySelector<HTMLInputElement>('input#skills-filter-input')!;
+    expect(input.type).toBe('search');
+    expect(section.querySelector('form')).toBeNull();
+    const grid = section.querySelector('.grid')!;
+    expect(input.compareDocumentPosition(grid) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
+    expect(section.querySelector<HTMLElement>('#skills-empty')!.hidden).toBe(true);
+    expect(section.querySelectorAll('.card')).toHaveLength(8);
+    expect(section.querySelectorAll('.card[hidden]')).toHaveLength(0);
+  });
+});

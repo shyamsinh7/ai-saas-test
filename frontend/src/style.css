@@ -156,3 +156,34 @@ h1:focus {
     scroll-behavior: auto !important;
   }
 }
+
+.skills-filter {
+  margin-bottom: 1rem;
+}
+
+.skills-filter label {
+  display: block;
+  margin-bottom: 0.25rem;
+  font-weight: 600;
+}
+
+.skills-filter input {
+  display: block;
+  width: 100%;
+  max-width: 24rem;
+  box-sizing: border-box;
+  padding: 0.5rem 0.75rem;
+  border: 1px solid #8aa9bd;
+  border-radius: 6px;
+  font: inherit;
+}
+
+.skills-empty {
+  margin: 0 0 1rem;
+}
+
+.card[hidden],
+.card li[hidden],
+.skills-empty[hidden] {
+  display: none;
+}

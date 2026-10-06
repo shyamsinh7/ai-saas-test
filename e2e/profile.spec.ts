@@ -87,3 +87,45 @@ test('Back to top button appears after scrolling and returns to the top', async 
   await expect(page.getByRole('heading', { level: 1 })).toBeFocused();
   await expect(button).toBeHidden();
 });
+
+test.describe('skills filter', () => {
+  const card = (page: import('@playwright/test').Page, name: string) =>
+    page.locator('#skills .card').filter({ has: page.getByRole('heading', { name, exact: true }) });
+
+  test('shows a labelled filter above the grid with all cards visible', async ({ page }) => {
+    const input = page.getByLabel('Filter skills');
+    await expect(input).toBeVisible();
+    await expect(page.locator('#skills .card')).toHaveCount(8);
+    await expect(card(page, 'Languages')).toBeVisible();
+    await expect(page.getByText('No skills match')).toBeHidden();
+  });
+
+  test('hides non-matching cards, ignoring case and surrounding spaces', async ({ page }) => {
+    await page.getByLabel('Filter skills').fill('  langchain ');
+    await expect(card(page, 'AI Frameworks')).toBeVisible();
+    await expect(card(page, 'AI Frameworks').getByText('LangChain')).toBeVisible();
+    await expect(card(page, 'AI Frameworks').getByText('CrewAI')).toBeHidden();
+    await expect(card(page, 'Languages')).toBeHidden();
+  });
+
+  test('shows a message when nothing matches and restores on clear', async ({ page }) => {
+    const input = page.getByLabel('Filter skills');
+    await input.fill('zzzz');
+    await expect(page.getByText('No skills match')).toBeVisible();
+    await expect(card(page, 'Languages')).toBeHidden();
+    await input.fill('');
+    await expect(page.getByText('No skills match')).toBeHidden();
+    await expect(card(page, 'Languages')).toBeVisible();
+    await expect(card(page, 'AI Frameworks').getByText('CrewAI')).toBeVisible();
+  });
+
+  test('pressing Enter does not navigate and the #skills anchor still works', async ({ page }) => {
+    const input = page.getByLabel('Filter skills');
+    await input.fill('python');
+    await input.press('Enter');
+    await expect(page).toHaveURL(/\/(#.*)?$/);
+    await expect(input).toHaveValue('python');
+    await page.goto('./#skills');
+    await expect(page.locator('#skills')).toBeInViewport();
+  });
+});
