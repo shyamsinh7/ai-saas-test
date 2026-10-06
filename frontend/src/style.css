@@ -120,3 +120,14 @@ footer {
     scroll-behavior: auto !important;
   }
 }
+
+.copy-btn {
+  font: inherit;
+  font-size: 0.85em;
+  margin-left: 0.25rem;
+  cursor: pointer;
+}
+.copy-status {
+  margin-left: 0.4rem;
+  font-size: 0.85em;
+}

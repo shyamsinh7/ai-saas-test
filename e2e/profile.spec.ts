@@ -66,3 +66,26 @@ test('page does not scroll horizontally on a phone', async ({ page }) => {
   );
   expect(overflow).toBeLessThanOrEqual(0);
 });
+
+test.describe('email Copy button', () => {
+  test('copies the address and confirms', async ({ page, context, browserName }) => {
+    test.skip(browserName !== 'chromium', 'clipboard permissions are Chromium-specific');
+    await context.grantPermissions(['clipboard-read', 'clipboard-write']);
+    await page.goto('./');
+    await page.locator('#contact').getByRole('button', { name: 'Copy email address' }).click();
+    await expect(page.locator('#contact [aria-live]')).toHaveText('Copied');
+    expect(await page.evaluate(() => navigator.clipboard.readText())).toBe(
+      'parmarshyamsingh8@gmail.com',
+    );
+    await expect(page.locator('#contact [aria-live]')).toHaveText('', { timeout: 4000 });
+  });
+
+  test('shows Copy failed without clipboard access', async ({ page }) => {
+    await page.addInitScript(() => {
+      Object.defineProperty(navigator, 'clipboard', { value: undefined });
+    });
+    await page.goto('./');
+    await page.locator('#contact').getByRole('button', { name: 'Copy email address' }).click();
+    await expect(page.locator('#contact [aria-live]')).toHaveText('Copy failed');
+  });
+});

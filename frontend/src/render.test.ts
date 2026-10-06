@@ -22,6 +22,14 @@ describe('renderProfile', () => {
     expect(document.title).toContain('Shyamsinh Parmar');
   });
 
+  it('adds a Copy button to each email contact only', () => {
+    const emails = data.contacts.filter((c) => c.href?.startsWith('mailto:')).length;
+    expect(root.querySelectorAll('#contact button[aria-label="Copy email address"]')).toHaveLength(
+      emails,
+    );
+    expect(root.querySelectorAll('#contact button')).toHaveLength(emails);
+  });
+
   it('renders contact links, keeping emails and phone numbers', () => {
     const hrefs = [...root.querySelectorAll<HTMLAnchorElement>('#contact a')].map((a) =>
       a.getAttribute('href'),
