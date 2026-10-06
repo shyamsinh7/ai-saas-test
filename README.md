@@ -19,6 +19,10 @@ dist/                 Build output (generated, git-ignored)
 - The frontend fetches `api/profile` when a backend serves it and otherwise falls back to the copy
   of `profile.json` bundled at build time, so the same build works on static hosting.
 
+- Each email (`mailto:`) contact in the header has a "Copy" button that copies the address to the
+  clipboard and shows "Copied" for about 2 seconds (in an `aria-live` region), or "Copy failed"
+  if the clipboard is unavailable.
+
 To change the content, edit `data/profile.json`.
 
 ## npm scripts
