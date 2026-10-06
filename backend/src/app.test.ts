@@ -80,3 +80,14 @@ describe('static frontend', () => {
     expect(res.status).toBe(503);
   });
 });
+
+describe('GET / (page served by the backend)', () => {
+  it('marks the page so the frontend uses the API', async () => {
+    const staticDir = tmp({ 'index.html': '<html><head></head><body></body></html>' });
+    const base = await start({ staticDir });
+    for (const url of [`${base}/`, `${base}/index.html`]) {
+      const html = await (await fetch(url)).text();
+      expect(html).toContain('<meta name="profile-source" content="api" />');
+    }
+  });
+});

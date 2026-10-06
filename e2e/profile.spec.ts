@@ -71,6 +71,8 @@ test('page does not scroll horizontally on a phone', async ({ page }) => {
 
 test('Back to top button appears after scrolling and returns to the top', async ({ page }) => {
   const button = page.getByRole('button', { name: 'Back to top' });
+  // Wait for the profile to render: before that there is nothing to scroll.
+  await expect(page.getByRole('heading', { level: 1 })).toBeVisible();
   await expect(button).toBeHidden();
   await page.evaluate(() => window.scrollTo(0, document.documentElement.scrollHeight));
   await expect(button).toBeVisible();

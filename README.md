@@ -16,8 +16,9 @@ dist/                 Build output (generated, git-ignored)
 - `GET /api/health` returns `{"status":"ok"}`.
 - `GET /api/profile` returns `data/profile.json`, validated against the zod schema in
   `backend/src/schema.ts` (HTTP 500 if it is invalid).
-- The frontend fetches `api/profile` when a backend serves it and otherwise falls back to the copy
-  of `profile.json` bundled at build time, so the same build works on static hosting.
+- When the backend serves the page it adds `<meta name="profile-source" content="api">` and the
+  frontend fetches `api/profile`. Without that marker (static hosting) it renders the copy of
+  `profile.json` bundled at build time and makes no API request, so the same build works on both.
 
 To change the content, edit `data/profile.json`.
 
