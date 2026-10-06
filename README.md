@@ -21,6 +21,13 @@ dist/                 Build output (generated, git-ignored)
 
 To change the content, edit `data/profile.json`.
 
+## Back to top button
+
+A "Back to top" button (`frontend/src/backToTop.ts`) is fixed to the bottom-right corner. It is
+hidden until the visitor has scrolled down more than one screen height. Clicking it scrolls to the
+top (instantly when the visitor prefers reduced motion, smoothly otherwise) and moves keyboard focus
+to the page heading.
+
 ## npm scripts
 
 | Script              | What it does                                                             |
