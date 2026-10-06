@@ -115,3 +115,34 @@ test('skip link is the first thing Tab reaches', async ({ page }) => {
   await page.keyboard.press('Tab');
   await expect(page.getByRole('link', { name: 'Skip to content' })).toBeFocused();
 });
+
+test.describe('skills filter', () => {
+  test('filters by item name, case-insensitively and ignoring spaces', async ({ page }) => {
+    const skills = page.locator('#skills');
+    const input = skills.getByLabel('Filter skills');
+    await expect(skills.locator('.card')).toHaveCount(8);
+    await input.fill('  langchain ');
+    const matching = skills.locator('.card', { has: page.locator('li', { hasText: 'LangChain' }) });
+    await expect(matching.first()).toBeVisible();
+    await expect(skills.locator('.card:not(:has(li:not([hidden])))').first()).toBeHidden();
+    await expect(skills.getByText('No skills match')).toBeHidden();
+    await expect(skills.getByRole('heading', { name: 'Core Skills & Technologies' })).toBeVisible();
+  });
+
+  test('shows a message when nothing matches and restores on clear', async ({ page }) => {
+    const skills = page.locator('#skills');
+    const input = skills.getByLabel('Filter skills');
+    await input.fill('zzzz');
+    await expect(skills.getByText('No skills match')).toBeVisible();
+    await expect(skills.locator('.card').first()).toBeHidden();
+    await input.fill('');
+    await expect(skills.getByText('No skills match')).toBeHidden();
+    for (const card of await skills.locator('.card').all()) await expect(card).toBeVisible();
+  });
+
+  test('TOC link still works while filtering', async ({ page }) => {
+    await page.locator('#skills').getByLabel('Filter skills').fill('zzzz');
+    await page.getByRole('navigation').getByRole('link', { name: 'Core Skills' }).click();
+    await expect(page).toHaveURL(/#skills$/);
+  });
+});

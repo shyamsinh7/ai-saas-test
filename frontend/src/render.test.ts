@@ -143,3 +143,17 @@ describe('footer last-updated date', () => {
     });
   });
 });
+
+describe('skills filter markup', () => {
+  it('renders a labelled input before the grid, with a hidden live message', () => {
+    const section = root.querySelector('#skills')!;
+    const label = section.querySelector('label[for="skills-filter-input"]')!;
+    expect(label.textContent).toBe('Filter skills');
+    const input = section.querySelector('input#skills-filter-input')!;
+    const grid = section.querySelector('.grid')!;
+    expect(input.compareDocumentPosition(grid) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
+    expect(section.querySelector('#skills-empty')!.hasAttribute('hidden')).toBe(true);
+    expect(section.querySelectorAll('.card')).toHaveLength(8);
+    expect(section.querySelectorAll('.card[hidden]')).toHaveLength(0);
+  });
+});
