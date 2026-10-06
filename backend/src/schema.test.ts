@@ -38,4 +38,13 @@ describe('profileSchema', () => {
     const portfolio = [{ name: 'a', description: 'b', url: 'ftp://example.com' }];
     expect(profileSchema.safeParse({ ...raw, portfolio }).success).toBe(false);
   });
+
+  it('accepts a profile without updatedAt', () => {
+    expect(profileSchema.safeParse({ ...raw, updatedAt: undefined }).success).toBe(true);
+  });
+
+  it('rejects an updatedAt that is not an ISO date', () => {
+    expect(profileSchema.safeParse({ ...raw, updatedAt: '6 October 2026' }).success).toBe(false);
+    expect(profileSchema.safeParse({ ...raw, updatedAt: '2026-13-45' }).success).toBe(false);
+  });
 });

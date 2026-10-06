@@ -5,10 +5,13 @@ const href = z
   .string()
   .regex(/^(https?:\/\/|mailto:|tel:)\S+$/, 'must be an http(s), mailto or tel link');
 
+const isoDate = z.iso.date();
+
 export const profileSchema = z.object({
   name: text,
   title: text,
   description: text,
+  updatedAt: isoDate.optional(),
   contacts: z.array(z.object({ label: text, value: text, href: href.optional() })).min(1),
   about: z.object({
     summary: text,

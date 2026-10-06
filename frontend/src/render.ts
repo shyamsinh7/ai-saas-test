@@ -106,6 +106,29 @@ function renderGetInTouch(profile: Profile): HTMLElement {
   return section('links', 'Get in Touch', el('p', {}, ...parts));
 }
 
+/** Formats an ISO date (YYYY-MM-DD) as e.g. "6 October 2026"; undefined if absent or invalid. */
+export function formatUpdatedAt(iso: string | undefined): string | undefined {
+  if (!iso || !/^\d{4}-\d{2}-\d{2}$/.test(iso)) return undefined;
+  const date = new Date(`${iso}T00:00:00Z`);
+  if (Number.isNaN(date.getTime())) return undefined;
+  return new Intl.DateTimeFormat('en-GB', {
+    day: 'numeric',
+    month: 'long',
+    year: 'numeric',
+    timeZone: 'UTC',
+  }).format(date);
+}
+
+function renderFooter(profile: Profile, year: number): HTMLElement {
+  const updated = formatUpdatedAt(profile.updatedAt);
+  return el(
+    'footer',
+    { id: 'footer' },
+    el('span', { class: 'copyright' }, `© ${year} ${profile.name}`),
+    ...(updated ? [el('span', { class: 'updated' }, `Last updated: ${updated}`)] : []),
+  );
+}
+
 /** Renders the whole profile page into `root`, replacing its content. */
 export function renderProfile(
   root: HTMLElement,
@@ -126,6 +149,6 @@ export function renderProfile(
     el('a', { class: 'skip-link', href: '#main' }, 'Skip to content'),
     renderHeader(profile),
     main,
-    el('footer', { id: 'footer' }, `© ${year} ${profile.name}`),
+    renderFooter(profile, year),
   );
 }

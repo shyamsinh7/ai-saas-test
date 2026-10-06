@@ -22,6 +22,15 @@ dist/                 Build output (generated, git-ignored)
 
 To change the content, edit `data/profile.json`.
 
+## Last updated date
+
+`updatedAt` in `data/profile.json` is an optional ISO date (e.g. `2026-10-06`). When present, the
+footer shows a second line below the copyright, "Last updated: 6 October 2026", formatted in
+English from that date (in UTC, so it does not shift with the visitor's time zone). Without the
+field, or with an unparseable value on the frontend, the footer shows no date. The schema rejects
+values that are not valid ISO dates, such as `2026-13-45`, so an invalid `updatedAt` makes
+`/api/profile` return HTTP 500.
+
 ## Back to top button
 
 A "Back to top" button (`frontend/src/backToTop.ts`) is fixed to the bottom-right corner. It is
