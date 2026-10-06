@@ -80,7 +80,31 @@ function renderSkills(profile: Profile): HTMLElement {
       el('ul', {}, ...s.items.map((i) => el('li', {}, i))),
     ),
   );
-  return section('skills', 'Core Skills & Technologies', el('div', { class: 'grid' }, ...cards));
+  const filter = el(
+    'div',
+    { class: 'skills-filter' },
+    el('label', { for: 'skills-filter-input' }, 'Filter skills'),
+    el('input', {
+      id: 'skills-filter-input',
+      type: 'search',
+      autocomplete: 'off',
+      placeholder: 'e.g. LangChain',
+    }),
+  );
+  const empty = el('p', {
+    id: 'skills-empty',
+    class: 'skills-empty',
+    role: 'status',
+    'aria-live': 'polite',
+    hidden: '',
+  });
+  return section(
+    'skills',
+    'Core Skills & Technologies',
+    filter,
+    empty,
+    el('div', { class: 'grid' }, ...cards),
+  );
 }
 
 function renderPortfolio(profile: Profile): HTMLElement {
