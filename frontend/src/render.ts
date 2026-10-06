@@ -1,4 +1,5 @@
 import type { Profile } from '../../backend/src/schema';
+import { createCopyButton } from './copy';
 
 type Child = Node | string;
 
@@ -29,9 +30,11 @@ function section(id: string, heading: string, ...children: Node[]): HTMLElement 
 }
 
 function renderHeader(profile: Profile): HTMLElement {
-  const items = profile.contacts.map((c) =>
-    el('li', {}, `${c.label}: `, c.href ? link(c.href, c.value) : c.value),
-  );
+  const items = profile.contacts.map((c) => {
+    const li = el('li', {}, `${c.label}: `, c.href ? link(c.href, c.value) : c.value);
+    if (c.href?.startsWith('mailto:')) li.append(' ', ...createCopyButton(c.value));
+    return li;
+  });
   return el(
     'header',
     {},

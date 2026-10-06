@@ -66,3 +66,15 @@ test('page does not scroll horizontally on a phone', async ({ page }) => {
   );
   expect(overflow).toBeLessThanOrEqual(0);
 });
+
+test.describe('copy email', () => {
+  test('copies the address and shows Copied', async ({ page, context }) => {
+    await context.grantPermissions(['clipboard-read', 'clipboard-write']);
+    await page.getByRole('button', { name: 'Copy email address' }).click();
+    await expect(page.locator('#contact [aria-live]')).toHaveText('Copied');
+    expect(await page.evaluate(() => navigator.clipboard.readText())).toBe(
+      'parmarshyamsingh8@gmail.com',
+    );
+    await expect(page.locator('#contact [aria-live]')).toHaveText('', { timeout: 4000 });
+  });
+});
