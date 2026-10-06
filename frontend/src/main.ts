@@ -3,6 +3,7 @@ import { loadProfile } from './data';
 import { renderProfile } from './render';
 import { initBackToTop } from './backToTop';
 import { initSkillsFilter } from './skillsFilter';
+import { initPortfolioFilter } from './portfolioFilter';
 
 const root = document.getElementById('app');
 if (root) {
@@ -10,5 +11,6 @@ if (root) {
     renderProfile(root, profile);
     initBackToTop();
     initSkillsFilter();
+    initPortfolioFilter();
   });
 }

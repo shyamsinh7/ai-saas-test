@@ -73,6 +73,16 @@ describe('renderProfile', () => {
     links.forEach((a) => expect(a.rel).toBe('noopener'));
   });
 
+  it('renders the category filter row and status without changing the heading total', () => {
+    expect(root.querySelectorAll('#portfolio .filter-btn').length).toBeGreaterThan(1);
+    expect(root.querySelector('#portfolio-status')?.textContent).toBe(
+      `Showing ${data.portfolio.length} of ${data.portfolio.length} projects`,
+    );
+    expect(root.querySelector('#portfolio-h')?.textContent).toBe(
+      `My Portfolio (${data.portfolio.length} projects)`,
+    );
+  });
+
   describe('portfolio cards', () => {
     const cards = () => [
       ...root.querySelectorAll<HTMLElement>('#portfolio .grid > article.card.project'),
