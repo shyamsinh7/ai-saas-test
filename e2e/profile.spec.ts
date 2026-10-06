@@ -66,3 +66,14 @@ test('page does not scroll horizontally on a phone', async ({ page }) => {
   );
   expect(overflow).toBeLessThanOrEqual(0);
 });
+
+test('Back to top button appears after scrolling and returns to the top', async ({ page }) => {
+  const button = page.getByRole('button', { name: 'Back to top' });
+  await expect(button).toBeHidden();
+  await page.evaluate(() => window.scrollTo(0, document.documentElement.scrollHeight));
+  await expect(button).toBeVisible();
+  await button.click();
+  await expect.poll(() => page.evaluate(() => window.scrollY)).toBe(0);
+  await expect(page.getByRole('heading', { level: 1 })).toBeFocused();
+  await expect(button).toBeHidden();
+});

@@ -110,9 +110,41 @@ ul.plain {
 
 footer {
   margin-top: 3rem;
-  padding-bottom: 2rem;
+  padding-bottom: 4.5rem; /* room so the back-to-top button never covers the footer */
   color: #666;
   font-size: 0.875rem;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+h1:focus {
+  outline: none;
+}
+
+.back-to-top {
+  position: fixed;
+  right: 1rem;
+  bottom: 1rem;
+  padding: 0.5rem 0.9rem;
+  font: inherit;
+  font-size: 0.875rem;
+  color: #fff;
+  background: var(--link);
+  border: 0;
+  border-radius: 999px;
+  box-shadow: 0 2px 6px rgb(0 0 0 / 25%);
+  cursor: pointer;
+}
+
+.back-to-top[hidden] {
+  display: none;
+}
+
+.back-to-top:focus-visible {
+  outline: 3px solid #000;
+  outline-offset: 2px;
 }
 
 @media (prefers-reduced-motion: reduce) {
