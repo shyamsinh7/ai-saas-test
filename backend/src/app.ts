@@ -40,6 +40,13 @@ export function createApp(options: AppOptions = {}): Express {
   });
 
   if (existsSync(staticDir)) {
+    // Tell the frontend that this backend serves the API, so it need not guess on static hosting.
+    app.get(['/', '/index.html'], (_req, res, next) => {
+      const indexPath = path.join(staticDir, 'index.html');
+      if (!existsSync(indexPath)) return next();
+      const marker = '<meta name="profile-source" content="api" />';
+      res.type('html').send(readFileSync(indexPath, 'utf8').replace('</head>', `${marker}</head>`));
+    });
     app.use(express.static(staticDir));
   } else {
     app.get('/', (_req, res) => {
