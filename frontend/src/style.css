@@ -124,8 +124,51 @@ ul.plain {
   color: var(--accent);
 }
 
+.project {
+  min-width: 0;
+}
+
+.project h3,
+.project p,
+.project a {
+  overflow-wrap: anywhere;
+}
+
 .project p {
   margin: 0 0 0.5rem;
+}
+
+/* Contrast: #0b3d63 on #e3f0f9 is about 9:1; #333 on #eef1f4 is about 11:1 (AA needs 4.5:1). */
+.project .badge {
+  display: inline-block;
+  max-width: 100%;
+  margin: 0 0 0.5rem;
+  padding: 0.1rem 0.6rem;
+  border-radius: 999px;
+  background: #e3f0f9;
+  color: #0b3d63;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  overflow-wrap: anywhere;
+}
+
+.card ul.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+  margin: 0 0 0.5rem;
+  padding: 0;
+  list-style: none;
+}
+
+.tags li {
+  min-width: 0;
+  padding: 0.1rem 0.5rem;
+  border-radius: 4px;
+  background: #eef1f4;
+  color: #333;
+  font-size: 0.8125rem;
+  overflow-wrap: anywhere;
 }
 
 footer {

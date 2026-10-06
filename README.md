@@ -37,6 +37,19 @@ and must be non-empty):
 To add a project, append an object with all the required fields to `portfolio`. If a required field
 is missing the schema rejects the data, `GET /api/profile` returns 500 and the bundled page fails.
 
+## Portfolio cards
+
+Each `portfolio` entry renders as an `article.card.project` in the `#portfolio .grid`, built from
+`data/profile.json` (see above):
+
+- `name` (h3), `summary`, a `category` badge and the `tags` as a `ul`/`li` list. The card also
+  carries `data-category`.
+- `url` adds a link with the `urlLabel` (or the url) as text; its accessible name also contains the
+  project name. http(s) links get `rel="noopener"`.
+- A project without `url` shows no link at all.
+- Long text and many tags wrap inside the card, so there is no horizontal scroll at 360px. The
+  tag and badge colours meet WCAG AA contrast (4.5:1).
+
 ## Last updated date
 
 `updatedAt` in `data/profile.json` is an optional ISO date (e.g. `2026-10-06`). When present, the

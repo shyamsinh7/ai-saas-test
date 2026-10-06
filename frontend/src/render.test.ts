@@ -73,6 +73,67 @@ describe('renderProfile', () => {
     links.forEach((a) => expect(a.rel).toBe('noopener'));
   });
 
+  describe('portfolio cards', () => {
+    const cards = () => [
+      ...root.querySelectorAll<HTMLElement>('#portfolio .grid > article.card.project'),
+    ];
+
+    it('renders every project as article.card.project inside .grid', () => {
+      expect(cards()).toHaveLength(data.portfolio.length);
+    });
+
+    it('shows name, summary, category badge and a ul/li tag list per card', () => {
+      cards().forEach((card, i) => {
+        const p = data.portfolio[i]!;
+        expect(card.querySelector('h3')?.textContent).toBe(p.name);
+        expect(card.querySelector('p.summary')?.textContent).toBe(p.summary);
+        expect(card.querySelector('.badge')?.textContent).toBe(p.category);
+        expect(card.dataset.category).toBe(p.category);
+        const tags = [...card.querySelectorAll('ul.tags > li')].map((li) => li.textContent);
+        expect(tags).toEqual(p.tags);
+      });
+    });
+
+    it('gives linked cards a descriptive link containing the project name', () => {
+      cards().forEach((card, i) => {
+        const p = data.portfolio[i]!;
+        const a = card.querySelector('a');
+        if (!p.url) return;
+        expect(a?.getAttribute('href')).toBe(p.url);
+        expect(a?.textContent).toBe(p.urlLabel ?? p.url);
+        const name = a?.getAttribute('aria-label') ?? a?.textContent ?? '';
+        expect(name).toContain(p.name);
+        expect(name).toContain(a?.textContent ?? '');
+        expect(a?.rel).toBe('noopener');
+      });
+    });
+
+    it('renders no anchor for a project without a url', () => {
+      const idx = data.portfolio.findIndex((p) => p.name.includes('Stockly'));
+      expect(idx).toBeGreaterThanOrEqual(0);
+      expect(data.portfolio[idx]!.url).toBeUndefined();
+      expect(cards()[idx]!.querySelector('a')).toBeNull();
+    });
+
+    it('uses the url as link text when there is no urlLabel', () => {
+      renderProfile(root, {
+        ...data,
+        portfolio: [{ ...data.portfolio[0]!, url: 'https://example.com/x', urlLabel: undefined }],
+      });
+      const a = root.querySelector('#portfolio article a')!;
+      expect(a.textContent).toBe('https://example.com/x');
+      expect(a.getAttribute('aria-label')).toContain(data.portfolio[0]!.name);
+    });
+
+    it('keeps section ids and renders an empty portfolio without error', () => {
+      expect(root.querySelector('#portfolio')).not.toBeNull();
+      expect(root.querySelector('#portfolio-h')).not.toBeNull();
+      expect(() => renderProfile(root, { ...data, portfolio: [] })).not.toThrow();
+      expect(root.querySelectorAll('#portfolio article')).toHaveLength(0);
+      expect(root.querySelector('#portfolio-h')?.textContent).toBe('My Portfolio');
+    });
+  });
+
   it('renders the closing sections and a footer with the year', () => {
     expect(root.querySelectorAll('#why li')).toHaveLength(data.why.length);
     expect(root.querySelector('#links a[href^="mailto:"]')).not.toBeNull();
