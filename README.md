@@ -31,6 +31,15 @@ field, or with an unparseable value on the frontend, the footer shows no date. T
 values that are not valid ISO dates, such as `2026-13-45`, so an invalid `updatedAt` makes
 `/api/profile` return HTTP 500.
 
+## Table of contents
+
+A table of contents (`<nav aria-label="Table of contents">`) sits directly under the header with
+three links in page order: About Me (`#about`), Core Skills (`#skills`) and My Portfolio
+(`#portfolio`). The labels are fixed and do not follow the section headings. The sections always
+render, so the links never dangle; "Why Work with Me?" and the contact links are not linked. The
+links wrap onto several lines on narrow screens, and scrolling uses the page-wide smooth-scroll
+rule (instant when the visitor prefers reduced motion).
+
 ## Back to top button
 
 A "Back to top" button (`frontend/src/backToTop.ts`) is fixed to the bottom-right corner. It is
