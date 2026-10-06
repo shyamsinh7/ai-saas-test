@@ -38,6 +38,25 @@ hidden until the visitor has scrolled down more than one screen height. Clicking
 top (instantly when the visitor prefers reduced motion, smoothly otherwise) and moves keyboard focus
 to the page heading.
 
+## Table of contents
+
+A small "Table of contents" navigation (built in `frontend/src/render.ts`) sits under the header. It
+links to "About Me" (`#about`), "Core Skills" (`#skills`) and "My Portfolio" (`#portfolio`), in page
+order. Clicking a link scrolls to that section (instantly when the visitor prefers reduced motion,
+smoothly otherwise). "Why Work with Me?" and "Get in Touch" are not linked. This is frontend only;
+there are no backend or data changes.
+
+## Skills filter
+
+A "Filter skills" box (`frontend/src/skillsFilter.ts`) sits above Core Skills. Matching is
+case-insensitive and by substring on the skill item names; surrounding whitespace is ignored, a
+whitespace-only value counts as empty, and special characters are matched literally. Category names
+are not matched. Items that do not match, and cards with no matching items, are hidden with the
+`hidden` attribute (not removed from the page). When nothing matches, a "No skills match" message is
+shown and announced politely to screen readers. Clearing the box restores all skills. It works the
+same with API data and with the bundled static data. This is client-side only; there are no backend
+changes.
+
 ## npm scripts
 
 | Script              | What it does                                                             |
