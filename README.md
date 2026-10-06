@@ -95,6 +95,19 @@ underline, so it is not shown by colour alone. A polite live region (`role="stat
 "Showing 5 of 19 projects"; focus does not move. The section heading keeps the total. Without
 JavaScript every card stays visible. No row is rendered when there are no projects.
 
+### `?category=` URL parameter
+
+The selected category is kept in the query string so a filtered view can be shared or bookmarked,
+e.g. `/ai-saas-test/?category=AI#portfolio`. On load the value is matched **exactly and
+case-sensitively** against the categories in the data (`?category=ai` does not match `AI`); a
+missing, empty, unknown or malformed value falls back to All, and the value is never inserted as
+HTML. With repeated params the first one wins; URL-encoded values (e.g. `Backend%2FCloud`) are
+decoded first. Clicking a filter button updates the URL with `history.replaceState` (no new
+history entries); All removes the parameter. Only the path's query string is rewritten: the current
+pathname, the hash and any other params are preserved, so it works under a sub-path such as
+`/ai-saas-test/`. The URL is written only on filter clicks, never on load or table-of-contents
+clicks. The skills filter is not stored in the URL. Deep links need JavaScript (static hosting).
+
 ## npm scripts
 
 | Script              | What it does                                                             |
