@@ -46,6 +46,11 @@ describe('GET /api/profile', () => {
     const body = await res.json();
     expect(body.name).toBe('Shyamsinh Parmar');
     expect(body.portfolio).toHaveLength(19);
+    for (const p of body.portfolio) {
+      expect(p.summary).toBeTruthy();
+      expect(p.category).toBeTruthy();
+      expect(p.tags.length).toBeGreaterThan(0);
+    }
   });
 
   it('returns 500 when the profile does not match the schema', async () => {

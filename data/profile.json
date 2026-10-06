@@ -95,112 +95,169 @@
     {
       "name": "HWS (Health Wealth Safe)",
       "description": "Healthcare platform for patient records, EMR, billing, chat and video consultations.",
+      "summary": "Healthcare platform for records, billing and video visits.",
+      "category": "Healthcare",
+      "tags": ["Healthcare", "EMR", "Video", "Chat"],
       "url": "https://www.healthwealthsafe.com/",
       "urlLabel": "healthwealthsafe.com"
     },
     {
       "name": "FrontDesk Clinic",
       "description": "AI-powered healthcare automation: scheduling, reminders, insurance verification and a virtual assistant.",
+      "summary": "AI automation for clinic scheduling and insurance checks.",
+      "category": "AI",
+      "tags": ["AI", "Healthcare", "Automation", "Virtual assistant"],
       "url": "https://frontdesk.clinic/",
       "urlLabel": "frontdesk.clinic"
     },
     {
       "name": "VetWise",
       "description": "24/7 virtual veterinary consultations across Canada with simple 3-step booking.",
+      "summary": "Virtual veterinary consultations with simple booking.",
+      "category": "Healthcare",
+      "tags": ["Telehealth", "Booking", "Web"],
       "url": "https://getvetwise.com/",
       "urlLabel": "getvetwise.com"
     },
     {
       "name": "AIVA Chat",
       "description": "Platform to create AI voice chatbots and embeddable chat widgets, with call recordings and analytics.",
+      "summary": "Builder for AI voice chatbots and embeddable chat widgets.",
+      "category": "AI",
+      "tags": ["AI", "Voice", "Chatbot", "Analytics"],
       "url": "https://aivachat.io/",
       "urlLabel": "aivachat.io"
     },
     {
       "name": "Stockly",
-      "description": "AI-powered stock market platform with real-time data and a social investing community."
+      "description": "AI-powered stock market platform with real-time data and a social investing community.",
+      "summary": "AI stock market platform with real-time data and community.",
+      "category": "Finance",
+      "tags": ["AI", "Real-time data", "Social"]
     },
     {
       "name": "Quick Hub",
       "description": "Online reputation management with AI review insights, campaigns and WhatsApp automation.",
+      "summary": "Reputation management with AI review insights and WhatsApp automation.",
+      "category": "AI",
+      "tags": ["AI", "WhatsApp", "Campaigns"],
       "url": "https://www.quickhub.ai/",
       "urlLabel": "quickhub.ai"
     },
     {
       "name": "Hcomb",
       "description": "AI-driven hiring and training platform with AI-powered interviews.",
+      "summary": "AI-driven hiring and training with AI-powered interviews.",
+      "category": "AI",
+      "tags": ["AI", "Hiring", "Training"],
       "url": "https://www.hcomb.ai/",
       "urlLabel": "hcomb.ai"
     },
     {
       "name": "Incorporight",
       "description": "Secure corporate information management with blockchain-backed records.",
+      "summary": "Secure corporate records backed by blockchain.",
+      "category": "Backend/Cloud",
+      "tags": ["Blockchain", "Security", "Records"],
       "url": "https://corprite.co/",
       "urlLabel": "corprite.co"
     },
     {
       "name": "Krone",
       "description": "Compliance and consulting platform with an AI assistant.",
+      "summary": "Compliance and consulting platform with an AI assistant.",
+      "category": "AI",
+      "tags": ["AI", "Compliance", "Assistant"],
       "url": "https://www.krone.one/",
       "urlLabel": "krone.one"
     },
     {
       "name": "AdvancedCare",
       "description": "AI-powered EHR with telehealth and insurance claims processing.",
+      "summary": "AI-powered EHR with telehealth and claims processing.",
+      "category": "Healthcare",
+      "tags": ["AI", "EHR", "Telehealth", "Insurance claims"],
       "url": "https://advancedcare.com/",
       "urlLabel": "advancedcare.com"
     },
     {
       "name": "PCO Intelligence",
       "description": "Amazon Lex and Amazon Connect customer support automation with custom widgets.",
+      "summary": "Customer support automation on Amazon Lex and Connect.",
+      "category": "Backend/Cloud",
+      "tags": ["AWS", "Amazon Lex", "Amazon Connect", "Widgets"],
       "url": "https://pcointelligence.com/",
       "urlLabel": "pcointelligence.com"
     },
     {
       "name": "YellowPad AI",
       "description": "AI-powered legal document drafting with intelligent templates.",
+      "summary": "AI legal document drafting with intelligent templates.",
+      "category": "AI",
+      "tags": ["AI", "Legal", "Templates"],
       "url": "https://www.yellowpad.ai/",
       "urlLabel": "yellowpad.ai"
     },
     {
       "name": "Sydon AI",
       "description": "AI platform for Amazon sellers: account health, profit, competitor analysis and outreach automation.",
+      "summary": "AI tools for Amazon sellers: profit, competitors and outreach.",
+      "category": "AI",
+      "tags": ["AI", "Amazon", "Automation", "Analytics"],
       "url": "https://sydon.ai/",
       "urlLabel": "sydon.ai"
     },
     {
       "name": "Goodfin AI",
       "description": "AI financial advisor with conversational budgeting and investment guidance.",
+      "summary": "AI financial advisor for budgeting and investing.",
+      "category": "Finance",
+      "tags": ["AI", "Finance", "Conversational"],
       "url": "https://www.goodfin.com/",
       "urlLabel": "goodfin.com"
     },
     {
       "name": "Lalo",
       "description": "ChatGPT API integration: a free AI obituary writer.",
+      "summary": "Free AI obituary writer built on the ChatGPT API.",
+      "category": "AI",
+      "tags": ["AI", "ChatGPT API"],
       "url": "https://www.lalo.app/",
       "urlLabel": "lalo.app"
     },
     {
       "name": "Reknew AI",
       "description": "Enterprise data modernization, AI adoption and intelligent automation.",
+      "summary": "Enterprise data modernization and intelligent automation.",
+      "category": "AI",
+      "tags": ["AI", "Data", "Automation"],
       "url": "https://reknew.ai/",
       "urlLabel": "reknew.ai"
     },
     {
       "name": "OmniAI Chatbot",
       "description": "Unified inbox for WhatsApp, Instagram and email with AI replies and Shopify integration.",
+      "summary": "Unified inbox for WhatsApp, Instagram and email with AI replies.",
+      "category": "AI",
+      "tags": ["AI", "WhatsApp", "Instagram", "Shopify"],
       "url": "https://omniaichatbot.com/",
       "urlLabel": "omniaichatbot.com"
     },
     {
       "name": "ServiceNow Dashboard",
       "description": "Real-time KPI dashboards and automated reporting.",
+      "summary": "Real-time KPI dashboards and automated reporting.",
+      "category": "Backend/Cloud",
+      "tags": ["ServiceNow", "Dashboards", "Reporting"],
       "url": "https://www.servicenow.com/",
       "urlLabel": "servicenow.com"
     },
     {
       "name": "Landbot ChatBot",
       "description": "Therapist-matching and appointment-booking chatbot with Asana and Zapier integration.",
+      "summary": "Therapist-matching and booking chatbot with Asana and Zapier.",
+      "category": "AI",
+      "tags": ["Chatbot", "Landbot", "Asana", "Zapier"],
       "url": "https://www.flourishtogethertherapy.com/",
       "urlLabel": "flourishtogethertherapy.com"
     }

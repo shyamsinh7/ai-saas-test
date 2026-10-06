@@ -18,6 +18,47 @@ describe('data/profile.json', () => {
     expect(hrefs).toContain('tel:+918866060908');
     expect(raw.portfolio).toHaveLength(19);
   });
+
+  it('gives every project a summary, category and at least one tag', () => {
+    for (const p of parseProfile(raw).portfolio) {
+      expect(p.summary.length).toBeGreaterThan(0);
+      expect(p.category.length).toBeGreaterThan(0);
+      expect(p.tags.length).toBeGreaterThan(0);
+    }
+  });
+
+  it('keeps Stockly valid without a url', () => {
+    const stockly = parseProfile(raw).portfolio.find((p) => p.name === 'Stockly');
+    expect(stockly?.url).toBeUndefined();
+  });
+});
+
+const project = { name: 'a', description: 'b', summary: 's', category: 'AI', tags: ['t'] };
+
+function withProject0(patch: Record<string, unknown>) {
+  const portfolio = [{ ...raw.portfolio[0], ...patch }, ...raw.portfolio.slice(1)];
+  return { ...raw, portfolio };
+}
+
+describe('profileSchema portfolio fields', () => {
+  it.each([
+    ['missing category', { category: undefined }],
+    ['empty category', { category: '' }],
+    ['whitespace category', { category: '   ' }],
+    ['missing tags', { tags: undefined }],
+    ['empty tags array', { tags: [] }],
+    ['blank tag', { tags: ['ok', '  '] }],
+    ['missing summary', { summary: undefined }],
+    ['empty summary', { summary: '' }],
+  ])('rejects %s', (_label, patch) => {
+    expect(profileSchema.safeParse(withProject0(patch)).success).toBe(false);
+  });
+
+  it('trims category and tags', () => {
+    const parsed = parseProfile(withProject0({ category: ' AI ', tags: [' x '] }));
+    expect(parsed.portfolio[0]?.category).toBe('AI');
+    expect(parsed.portfolio[0]?.tags).toEqual(['x']);
+  });
 });
 
 describe('profileSchema', () => {
@@ -35,7 +76,7 @@ describe('profileSchema', () => {
   });
 
   it('rejects a project with a non-http url', () => {
-    const portfolio = [{ name: 'a', description: 'b', url: 'ftp://example.com' }];
+    const portfolio = [{ ...project, url: 'ftp://example.com' }];
     expect(profileSchema.safeParse({ ...raw, portfolio }).success).toBe(false);
   });
 
