@@ -21,6 +21,9 @@ dist/                 Build output (generated, git-ignored)
 
 To change the content, edit `data/profile.json`.
 
+The My Portfolio heading shows the number of projects, computed when the page renders: "My Portfolio
+(1 project)", "My Portfolio (6 projects)", and plain "My Portfolio" when there are none.
+
 ## npm scripts
 
 | Script              | What it does                                                             |
