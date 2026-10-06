@@ -85,6 +85,16 @@ message is announced politely (`aria-live`). Clearing the box, or entering only 
 everything again. Items are hidden with the `hidden` attribute, never removed, and the filter runs
 in the browser in both API and bundled-data modes.
 
+## Portfolio category filter
+
+A row of buttons (`frontend/src/portfolioFilter.ts`) above the portfolio cards shows "All" plus one
+button per category found in the data (first-seen order, never an empty category). Clicking a button
+(or pressing Enter/Space on it) shows only that category's projects; the others get the `hidden`
+attribute and are never removed. The active button has `aria-pressed="true"` and a checkmark and
+underline, so it is not shown by colour alone. A polite live region (`role="status"`) reports e.g.
+"Showing 5 of 19 projects"; focus does not move. The section heading keeps the total. Without
+JavaScript every card stays visible. No row is rendered when there are no projects.
+
 ## npm scripts
 
 | Script              | What it does                                                             |

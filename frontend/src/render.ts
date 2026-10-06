@@ -130,7 +130,34 @@ function renderPortfolio(profile: Profile): HTMLElement {
   const heading = count
     ? `My Portfolio (${count} ${count === 1 ? 'project' : 'projects'})`
     : 'My Portfolio';
-  return section('portfolio', heading, el('div', { class: 'grid' }, ...cards));
+  const categories = [...new Set(profile.portfolio.map((p) => p.category))];
+  const filter: Node[] = count
+    ? [
+        el(
+          'div',
+          { class: 'portfolio-filter', role: 'group', 'aria-label': 'Filter projects by category' },
+          el('button', { type: 'button', class: 'filter-btn', 'aria-pressed': 'true' }, 'All'),
+          ...categories.map((c) =>
+            el(
+              'button',
+              { type: 'button', class: 'filter-btn', 'data-category': c, 'aria-pressed': 'false' },
+              c,
+            ),
+          ),
+        ),
+        el(
+          'p',
+          {
+            id: 'portfolio-status',
+            class: 'portfolio-status',
+            role: 'status',
+            'aria-live': 'polite',
+          },
+          `Showing ${count} of ${count} ${count === 1 ? 'project' : 'projects'}`,
+        ),
+      ]
+    : [];
+  return section('portfolio', heading, ...filter, el('div', { class: 'grid' }, ...cards));
 }
 
 function renderWhy(profile: Profile): HTMLElement {
