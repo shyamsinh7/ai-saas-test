@@ -101,6 +101,81 @@ test('Back to top button appears after scrolling and returns to the top', async 
   await expect(button).toBeHidden();
 });
 
+test('Back to top button is a 44px target that does not cover the footer text', async ({
+  page,
+}) => {
+  const button = page.getByRole('button', { name: 'Back to top' });
+  await expect(page.getByRole('heading', { level: 1 })).toBeVisible();
+  await page.evaluate(() => window.scrollTo(0, document.documentElement.scrollHeight));
+  await expect(button).toBeVisible();
+  const box = await button.boundingBox();
+  expect(box!.height).toBeGreaterThanOrEqual(44);
+  expect(box!.width).toBeGreaterThanOrEqual(44);
+  for (const selector of ['footer .updated', 'footer .copyright']) {
+    const target = page.locator(selector);
+    if ((await target.count()) === 0) continue;
+    const other = await target.first().boundingBox();
+    const overlaps =
+      box!.x < other!.x + other!.width &&
+      box!.x + box!.width > other!.x &&
+      box!.y < other!.y + other!.height &&
+      box!.y + box!.height > other!.y;
+    expect(overlaps, `${selector} is covered`).toBe(false);
+  }
+});
+
+test('table of contents links are 44px pills that fit a 375px screen', async ({ page }) => {
+  await page.setViewportSize({ width: 375, height: 812 });
+  const links = page.getByRole('navigation', { name: 'Table of contents' }).getByRole('link');
+  await expect(links).toHaveCount(3);
+  for (const link of await links.all()) {
+    const box = await link.boundingBox();
+    expect(box!.height).toBeGreaterThanOrEqual(44);
+    expect(box!.x + box!.width).toBeLessThanOrEqual(375);
+  }
+  const overflow = await page.evaluate(
+    () => document.documentElement.scrollWidth - document.documentElement.clientWidth,
+  );
+  expect(overflow).toBeLessThanOrEqual(0);
+});
+
+test('table of contents links change background on hover', async ({ page }) => {
+  const link = page
+    .getByRole('navigation', { name: 'Table of contents' })
+    .getByRole('link')
+    .first();
+  await expect(link).toBeVisible();
+  const resting = await link.evaluate((el) => getComputedStyle(el).backgroundColor);
+  await link.hover();
+  await expect
+    .poll(() => link.evaluate((el) => getComputedStyle(el).backgroundColor))
+    .not.toBe(resting);
+});
+
+test.describe('reduced motion', () => {
+  test.use({ reducedMotion: 'reduce' });
+
+  test('navigation jumps without animation', async ({ page }) => {
+    await expect(page.getByRole('heading', { level: 1 })).toBeVisible();
+    expect(
+      await page.evaluate(() => getComputedStyle(document.documentElement).scrollBehavior),
+    ).toBe('auto');
+    const link = page
+      .getByRole('navigation', { name: 'Table of contents' })
+      .getByRole('link')
+      .first();
+    expect(await link.evaluate((el) => getComputedStyle(el).transitionDuration)).toBe('0s');
+    await page.getByRole('link', { name: 'My Portfolio' }).click();
+    await expect(page.locator('#portfolio-h')).toBeInViewport();
+    const button = page.getByRole('button', { name: 'Back to top' });
+    await page.evaluate(() => window.scrollTo(0, document.documentElement.scrollHeight));
+    await expect(button).toBeVisible();
+    expect(await button.evaluate((el) => getComputedStyle(el).transitionDuration)).toBe('0s');
+    await button.click();
+    expect(await page.evaluate(() => window.scrollY)).toBe(0);
+  });
+});
+
 test('table of contents links to the three sections', async ({ page }) => {
   const toc = page.getByRole('navigation', { name: 'Table of contents' });
   await expect(toc).toBeVisible();

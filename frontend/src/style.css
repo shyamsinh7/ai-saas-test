@@ -14,6 +14,7 @@
   --badge-text: #0b3d63;
   --tag-bg: #eef1f4;
   --tag-text: #333;
+  --link-pressed: #082d4a;
   --focus-ring: #0b3d63;
   --focus-ring-halo: #fff;
 
@@ -89,13 +90,41 @@ header {
   flex-wrap: wrap;
   gap: var(--space-2);
   margin: 0;
+  padding: 0;
+}
+
+.toc li {
+  min-width: 0;
 }
 
 .toc a {
-  display: inline-block;
-  padding: var(--space-1) var(--space-3);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  min-width: 44px;
+  min-height: 44px;
+  max-width: 100%;
+  padding: var(--space-2) var(--space-4);
   border: 1px solid var(--accent);
   border-radius: var(--radius-pill);
+  background: var(--surface);
+  font-weight: 600;
+  text-decoration: none;
+  transition:
+    background-color 120ms,
+    border-color 120ms,
+    box-shadow 120ms;
+}
+
+.toc a:hover {
+  background: var(--badge-bg);
+  border-color: var(--link);
+}
+
+.toc a:active {
+  background: var(--selected-bg);
+  border-color: var(--focus-ring);
 }
 
 h1 {
@@ -112,6 +141,10 @@ h1 {
   font-weight: 600;
   color: var(--muted);
   overflow-wrap: anywhere;
+}
+
+main > section {
+  scroll-margin-top: var(--space-4);
 }
 
 main > section + section {
@@ -327,7 +360,9 @@ ul.plain {
 
 footer {
   margin-top: var(--space-7);
-  padding-bottom: var(--space-8); /* room so the back-to-top button never covers the footer */
+  padding-bottom: calc(
+    44px + 2 * var(--space-4)
+  ); /* room so the back-to-top button never covers the footer */
   color: var(--muted);
   font-size: var(--fs-sm);
 }
@@ -346,17 +381,33 @@ h1:focus {
 
 .back-to-top {
   position: fixed;
-  right: var(--space-4);
-  bottom: var(--space-4);
-  padding: var(--space-2) 0.9rem;
+  right: max(var(--space-4), env(safe-area-inset-right));
+  bottom: max(var(--space-4), env(safe-area-inset-bottom));
+  z-index: 5; /* below .skip-link (10), which sits top-left */
+  min-width: 44px;
+  min-height: 44px;
+  padding: var(--space-2) var(--space-4);
   font: inherit;
   font-size: var(--fs-sm);
+  font-weight: 600;
   color: var(--on-link);
   background: var(--link);
   border: 0;
   border-radius: var(--radius-pill);
   box-shadow: var(--shadow-md);
   cursor: pointer;
+  transition:
+    background-color 120ms,
+    box-shadow 120ms;
+}
+
+.back-to-top:hover {
+  background: var(--focus-ring);
+}
+
+.back-to-top:active {
+  background: var(--link-pressed);
+  box-shadow: var(--shadow-sm);
 }
 
 .back-to-top[hidden] {
