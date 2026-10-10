@@ -16,7 +16,7 @@ describe('data/profile.json', () => {
     const hrefs = parseProfile(raw).contacts.map((c) => c.href);
     expect(hrefs).toContain('mailto:parmarshyamsingh8@gmail.com');
     expect(hrefs).toContain('tel:+918866060908');
-    expect(raw.portfolio).toHaveLength(19);
+    expect(raw.portfolio).toHaveLength(23);
   });
 
   it('gives every project a summary, category and at least one tag', () => {
@@ -27,8 +27,8 @@ describe('data/profile.json', () => {
     }
   });
 
-  it('keeps Stockly valid without a url', () => {
-    const stockly = parseProfile(raw).portfolio.find((p) => p.name === 'Stockly');
+  it('keeps Handytrack valid without a url', () => {
+    const stockly = parseProfile(raw).portfolio.find((p) => p.name === 'Handytrack');
     expect(stockly?.url).toBeUndefined();
   });
 });

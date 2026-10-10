@@ -14,7 +14,9 @@ test.beforeEach(async ({ page }) => {
 
 test('shows the name, title and page title', async ({ page }) => {
   await expect(page.getByRole('heading', { level: 1 })).toHaveText('Shyamsinh Parmar');
-  await expect(page.locator('.role')).toHaveText('Principal Engineer & Enterprise Architect');
+  await expect(page.locator('.role')).toHaveText(
+    'AI Agent Engineer | AI-native SaaS & Autonomous Business Systems',
+  );
   await expect(page).toHaveTitle(/Shyamsinh Parmar/);
 });
 
@@ -37,21 +39,21 @@ test('contact links keep email, phone and GitHub', async ({ page }) => {
 test('About Me section is shown', async ({ page }) => {
   const about = page.locator('#about');
   await expect(about.getByRole('heading', { name: 'About Me' })).toBeVisible();
-  await expect(about).toContainText('8 years of experience');
-  await expect(about.locator('li')).toHaveCount(4);
+  await expect(about).toContainText('8+ years of software engineering experience');
+  await expect(about.locator('li')).toHaveCount(5);
 });
 
 test('Core Skills & Technologies section is shown', async ({ page }) => {
   const skills = page.locator('#skills');
   await expect(skills.getByRole('heading', { name: 'Core Skills & Technologies' })).toBeVisible();
-  await expect(skills.locator('.card')).toHaveCount(8);
+  await expect(skills.locator('.card')).toHaveCount(10);
   await expect(skills).toContainText('LangChain');
 });
 
 test('My Portfolio section lists the projects with links', async ({ page }) => {
   const portfolio = page.locator('#portfolio');
   await expect(
-    portfolio.getByRole('heading', { name: 'My Portfolio (19 projects)' }),
+    portfolio.getByRole('heading', { name: 'My Portfolio (23 projects)' }),
   ).toBeVisible();
   await expect(portfolio.locator('article')).toHaveCount(total);
   const card = portfolio.locator('article', { hasText: 'HWS (Health Wealth Safe)' });
@@ -70,7 +72,7 @@ test('footer shows the current year', async ({ page }) => {
 });
 
 test('footer shows when the profile was last updated', async ({ page }) => {
-  await expect(page.locator('footer .updated')).toHaveText('Last updated: 6 October 2026');
+  await expect(page.locator('footer .updated')).toHaveText('Last updated: 10 October 2026');
 });
 
 test('nothing of the greeting app remains', async ({ page }) => {
@@ -131,7 +133,7 @@ test.describe('skills filter', () => {
   test('filters by item name, case-insensitively and ignoring spaces', async ({ page }) => {
     const skills = page.locator('#skills');
     const input = skills.getByLabel('Filter skills');
-    await expect(skills.locator('.card')).toHaveCount(8);
+    await expect(skills.locator('.card')).toHaveCount(10);
     await input.fill('  langchain ');
     const matching = skills.locator('.card', { has: page.locator('li', { hasText: 'LangChain' }) });
     await expect(matching.first()).toBeVisible();

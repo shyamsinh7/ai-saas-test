@@ -17,7 +17,7 @@ describe('renderProfile', () => {
   it('shows the name and title in the header and document title', () => {
     expect(root.querySelector('h1')?.textContent).toBe('Shyamsinh Parmar');
     expect(root.querySelector('.role')?.textContent).toBe(
-      'Principal Engineer & Enterprise Architect',
+      'AI Agent Engineer | AI-native SaaS & Autonomous Business Systems',
     );
     expect(document.title).toContain('Shyamsinh Parmar');
   });
@@ -34,7 +34,7 @@ describe('renderProfile', () => {
   it('renders the About Me section', () => {
     const about = root.querySelector('#about')!;
     expect(about.querySelector('h2')?.textContent).toBe('About Me');
-    expect(about.textContent).toContain('8 years of experience');
+    expect(about.textContent).toContain('8+ years of software engineering experience');
     expect(about.querySelectorAll('li')).toHaveLength(data.about.highlights.length);
   });
 
@@ -67,7 +67,7 @@ describe('renderProfile', () => {
 
   it('renders every portfolio project, with safe links only where a url exists', () => {
     const projects = root.querySelectorAll('#portfolio article');
-    expect(projects).toHaveLength(19);
+    expect(projects).toHaveLength(23);
     const links = root.querySelectorAll<HTMLAnchorElement>('#portfolio article a');
     expect(links.length).toBe(data.portfolio.filter((p) => p.url).length);
     links.forEach((a) => expect(a.rel).toBe('noopener'));
@@ -119,7 +119,7 @@ describe('renderProfile', () => {
     });
 
     it('renders no anchor for a project without a url', () => {
-      const idx = data.portfolio.findIndex((p) => p.name.includes('Stockly'));
+      const idx = data.portfolio.findIndex((p) => p.name.includes('Handytrack'));
       expect(idx).toBeGreaterThanOrEqual(0);
       expect(data.portfolio[idx]!.url).toBeUndefined();
       expect(cards()[idx]!.querySelector('a')).toBeNull();
@@ -173,7 +173,9 @@ describe('footer last-updated date', () => {
   });
 
   it('shows the formatted date in the footer', () => {
-    expect(root.querySelector('footer .updated')?.textContent).toBe('Last updated: 6 October 2026');
+    expect(root.querySelector('footer .updated')?.textContent).toBe(
+      'Last updated: 10 October 2026',
+    );
   });
 
   it('returns nothing for a missing or invalid date', () => {
@@ -224,7 +226,7 @@ describe('skills filter markup', () => {
     const grid = section.querySelector('.grid')!;
     expect(input.compareDocumentPosition(grid) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
     expect(section.querySelector('#skills-empty')!.hasAttribute('hidden')).toBe(true);
-    expect(section.querySelectorAll('.card')).toHaveLength(8);
+    expect(section.querySelectorAll('.card')).toHaveLength(10);
     expect(section.querySelectorAll('.card[hidden]')).toHaveLength(0);
   });
 });

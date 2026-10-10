@@ -52,7 +52,7 @@ describe('initSkillsFilter', () => {
       for (const li of shown) expect(li.textContent!.toLowerCase()).toContain('langchain');
     }
     expect(empty.hidden).toBe(true);
-    expect(cards()).toHaveLength(8);
+    expect(cards()).toHaveLength(10);
   });
 
   it('shows a polite message when nothing matches', () => {

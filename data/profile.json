@@ -1,8 +1,8 @@
 {
   "name": "Shyamsinh Parmar",
-  "title": "Principal Engineer & Enterprise Architect",
-  "description": "Personal profile of Shyamsinh Parmar: Backend & AI Architect with 8+ years of experience.",
-  "updatedAt": "2026-10-06",
+  "title": "AI Agent Engineer | AI-native SaaS & Autonomous Business Systems",
+  "description": "Personal profile of Shyamsinh Parmar: AI Agent Engineer & Backend Architect with 8+ years of software engineering experience.",
+  "updatedAt": "2026-10-10",
   "contacts": [
     {
       "label": "Email",
@@ -33,152 +33,114 @@
     }
   ],
   "about": {
-    "summary": "I am a highly skilled Backend & AI Architect with over 8 years of experience designing and implementing scalable, high-performance systems that drive business growth and automation.",
+    "summary": "I am an AI Agent Engineer & Backend Architect with 8+ years of software engineering experience, specializing in production-ready AI systems and intelligent automation.",
     "highlights": [
       {
-        "title": "AI & NLP-powered Chatbots",
-        "text": "automating customer engagement with advanced AI-driven conversations."
+        "title": "AI Agents & Agentic Workflows",
+        "text": "agents that understand context, access business data, use tools and execute real-world business processes."
       },
       {
-        "title": "Scalable Cloud Architecture",
-        "text": "resilient, high-availability systems with AWS, microservices, and DevOps best practices."
+        "title": "Core Expertise",
+        "text": "AI Agents, RAG, MCP, Voice AI, AI Automation, Backend Engineering, APIs, Databases and Cloud Infrastructure."
       },
       {
-        "title": "Backend Optimization",
-        "text": "speed, security, and reliability in backend development."
+        "title": "Complete AI Systems",
+        "text": "agent architecture, tools, memory, knowledge, business rules, human-in-the-loop workflows, security and production infrastructure."
       },
       {
-        "title": "Twilio & API Integrations",
-        "text": "seamless voice, messaging, and chatbot solutions."
+        "title": "AI SaaS & Integrations",
+        "text": "AI SaaS platforms, AI copilots, CRM integrations, Voice AI systems and scalable backends using OpenAI, LangGraph, Python, Node.js, TypeScript, FastAPI, PostgreSQL, Redis, AWS and Docker."
+      },
+      {
+        "title": "Production Focus",
+        "text": "reliable, scalable, secure, production-ready AI solutions that solve real business problems."
       }
     ]
   },
   "skills": [
     {
       "category": "Languages",
-      "items": ["Python", "JavaScript", "Node.js", "PHP"]
+      "items": ["Python", "JavaScript", "TypeScript", "Node.js", "PHP"]
     },
     {
       "category": "AI & LLMs",
       "items": [
         "OpenAI, Anthropic Claude, Google Gemini",
         "Meta Llama, Mistral AI, Hugging Face",
-        "RAG, AI Agents, Prompt Engineering"
+        "FastChat, Llama.cpp, oobabooga"
       ]
     },
     {
       "category": "AI Frameworks",
-      "items": ["LangChain, LangGraph, LlamaIndex", "CrewAI, AutoGen, OpenAI Agents SDK"]
+      "items": ["LangGraph, LangChain, LlamaIndex", "CrewAI, AutoGen, OpenAI Agents SDK"]
+    },
+    {
+      "category": "AI Technologies",
+      "items": [
+        "Generative AI, LLMs, AI Agents, Agentic Workflows, Multi-Agent Systems",
+        "RAG, MCP (Model Context Protocol), Function & Tool Calling",
+        "AI Memory & Context Management, Embeddings, Semantic & Vector Search",
+        "AI Copilots, Human-in-the-Loop, AI Workflow Automation"
+      ]
     },
     {
       "category": "Backend & Frontend",
-      "items": ["FastAPI, Flask, Express.js, NestJS", "React.js, Next.js, Angular"]
+      "items": ["FastAPI, Express.js, NestJS, REST APIs, WebSockets", "React.js, Next.js, Angular"]
     },
     {
       "category": "Data",
-      "items": ["PostgreSQL, MongoDB, MySQL, Redis", "Pinecone, Weaviate, ChromaDB, FAISS"]
+      "items": [
+        "PostgreSQL, MongoDB, MySQL, Redis, Firebase, SQLite, DynamoDB, DocumentDB",
+        "Pinecone, Weaviate, ChromaDB, FAISS, Milvus, Qdrant, pgvector"
+      ]
     },
     {
       "category": "Cloud & DevOps",
-      "items": ["AWS, Docker, Nginx, Linux", "GitHub Actions, GitLab CI/CD"]
+      "items": [
+        "AWS, Docker, Nginx, PM2, Linux, SSL",
+        "GitHub Actions, GitLab CI/CD, Load Balancing, Auto Scaling"
+      ]
     },
     {
-      "category": "Integrations",
-      "items": ["REST, GraphQL, Webhooks, WebSockets", "Twilio, WhatsApp, Telegram, Slack"]
+      "category": "API & Real-Time",
+      "items": [
+        "REST API, GraphQL, SOAP, Webhooks, Microservices, API Integrations",
+        "WebSockets, Socket.IO, Server-Sent Events (SSE), OpenAI Realtime"
+      ]
     },
     {
       "category": "Chatbot Platforms",
-      "items": ["Botpress, Dialogflow, Amazon Lex", "RASA, Landbot"]
+      "items": [
+        "Botpress, Dialogflow, Amazon Lex, Microsoft Azure Bot",
+        "IBM Watson, RASA, BotKit, FlowXO, ManyChat, Chatfuel"
+      ]
+    },
+    {
+      "category": "Communication Platforms",
+      "items": [
+        "Twilio, Chatwoot, WhatsApp, Telegram, Slack",
+        "Facebook Messenger, Google Assistant, Skype, Viber"
+      ]
     }
   ],
   "portfolio": [
     {
-      "name": "HWS (Health Wealth Safe)",
-      "description": "Healthcare platform for patient records, EMR, billing, chat and video consultations.",
-      "summary": "Healthcare platform for records, billing and video visits.",
-      "category": "Healthcare",
-      "tags": ["Healthcare", "EMR", "Video", "Chat"],
-      "url": "https://www.healthwealthsafe.com/",
-      "urlLabel": "healthwealthsafe.com"
-    },
-    {
-      "name": "FrontDesk Clinic",
-      "description": "AI-powered healthcare automation: scheduling, reminders, insurance verification and a virtual assistant.",
-      "summary": "AI automation for clinic scheduling and insurance checks.",
-      "category": "AI",
-      "tags": ["AI", "Healthcare", "Automation", "Virtual assistant"],
-      "url": "https://frontdesk.clinic/",
-      "urlLabel": "frontdesk.clinic"
-    },
-    {
-      "name": "VetWise",
-      "description": "24/7 virtual veterinary consultations across Canada with simple 3-step booking.",
-      "summary": "Virtual veterinary consultations with simple booking.",
-      "category": "Healthcare",
-      "tags": ["Telehealth", "Booking", "Web"],
-      "url": "https://getvetwise.com/",
-      "urlLabel": "getvetwise.com"
-    },
-    {
       "name": "AIVA Chat",
-      "description": "Platform to create AI voice chatbots and embeddable chat widgets, with call recordings and analytics.",
-      "summary": "Builder for AI voice chatbots and embeddable chat widgets.",
+      "description": "Voice chatbot and embeddable widget platform: instant voice bots, website chat widget, call recordings and logs, and built-in analytics.",
+      "summary": "Voice chatbots and embeddable chat widgets with analytics.",
       "category": "AI",
       "tags": ["AI", "Voice", "Chatbot", "Analytics"],
       "url": "https://aivachat.io/",
       "urlLabel": "aivachat.io"
     },
     {
-      "name": "Stockly",
-      "description": "AI-powered stock market platform with real-time data and a social investing community.",
-      "summary": "AI stock market platform with real-time data and community.",
-      "category": "Finance",
-      "tags": ["AI", "Real-time data", "Social"]
-    },
-    {
-      "name": "Quick Hub",
-      "description": "Online reputation management with AI review insights, campaigns and WhatsApp automation.",
-      "summary": "Reputation management with AI review insights and WhatsApp automation.",
+      "name": "AI Phone CRM",
+      "description": "AI voice calling with real-time handling, call history and transcriptions, contact CRM, AI tasks and reminders, and call routing.",
+      "summary": "AI voice calling with a built-in contact CRM.",
       "category": "AI",
-      "tags": ["AI", "WhatsApp", "Campaigns"],
-      "url": "https://www.quickhub.ai/",
-      "urlLabel": "quickhub.ai"
-    },
-    {
-      "name": "Hcomb",
-      "description": "AI-driven hiring and training platform with AI-powered interviews.",
-      "summary": "AI-driven hiring and training with AI-powered interviews.",
-      "category": "AI",
-      "tags": ["AI", "Hiring", "Training"],
-      "url": "https://www.hcomb.ai/",
-      "urlLabel": "hcomb.ai"
-    },
-    {
-      "name": "Incorporight",
-      "description": "Secure corporate information management with blockchain-backed records.",
-      "summary": "Secure corporate records backed by blockchain.",
-      "category": "Backend/Cloud",
-      "tags": ["Blockchain", "Security", "Records"],
-      "url": "https://corprite.co/",
-      "urlLabel": "corprite.co"
-    },
-    {
-      "name": "Krone",
-      "description": "Compliance and consulting platform with an AI assistant.",
-      "summary": "Compliance and consulting platform with an AI assistant.",
-      "category": "AI",
-      "tags": ["AI", "Compliance", "Assistant"],
-      "url": "https://www.krone.one/",
-      "urlLabel": "krone.one"
-    },
-    {
-      "name": "AdvancedCare",
-      "description": "AI-powered EHR with telehealth and insurance claims processing.",
-      "summary": "AI-powered EHR with telehealth and claims processing.",
-      "category": "Healthcare",
-      "tags": ["AI", "EHR", "Telehealth", "Insurance claims"],
-      "url": "https://advancedcare.com/",
-      "urlLabel": "advancedcare.com"
+      "tags": ["AI", "Voice", "CRM", "Twilio"],
+      "url": "https://thalwai.com/",
+      "urlLabel": "thalwai.com"
     },
     {
       "name": "PCO Intelligence",
@@ -190,17 +152,8 @@
       "urlLabel": "pcointelligence.com"
     },
     {
-      "name": "YellowPad AI",
-      "description": "AI-powered legal document drafting with intelligent templates.",
-      "summary": "AI legal document drafting with intelligent templates.",
-      "category": "AI",
-      "tags": ["AI", "Legal", "Templates"],
-      "url": "https://www.yellowpad.ai/",
-      "urlLabel": "yellowpad.ai"
-    },
-    {
       "name": "Sydon AI",
-      "description": "AI platform for Amazon sellers: account health, profit, competitor analysis and outreach automation.",
+      "description": "AI platform for Amazon sellers: account health, profit, margins, FBA insights, competitor analysis and outreach automation.",
       "summary": "AI tools for Amazon sellers: profit, competitors and outreach.",
       "category": "AI",
       "tags": ["AI", "Amazon", "Automation", "Analytics"],
@@ -209,21 +162,12 @@
     },
     {
       "name": "Goodfin AI",
-      "description": "AI financial advisor with conversational budgeting and investment guidance.",
+      "description": "AI financial advisor connected to bank and brokerage accounts, with conversational budgeting, savings and investment guidance.",
       "summary": "AI financial advisor for budgeting and investing.",
       "category": "Finance",
       "tags": ["AI", "Finance", "Conversational"],
       "url": "https://www.goodfin.com/",
       "urlLabel": "goodfin.com"
-    },
-    {
-      "name": "Lalo",
-      "description": "ChatGPT API integration: a free AI obituary writer.",
-      "summary": "Free AI obituary writer built on the ChatGPT API.",
-      "category": "AI",
-      "tags": ["AI", "ChatGPT API"],
-      "url": "https://www.lalo.app/",
-      "urlLabel": "lalo.app"
     },
     {
       "name": "Reknew AI",
@@ -235,8 +179,98 @@
       "urlLabel": "reknew.ai"
     },
     {
+      "name": "Vagmi AI",
+      "description": "AI voice agents for patient appointments, with live patient queue and token management, doctor availability, call recordings and clinic reports.",
+      "summary": "AI voice agents and queue management for clinics.",
+      "category": "Healthcare",
+      "tags": ["AI", "Voice", "Healthcare", "Scheduling"],
+      "url": "https://vagmiai.in/",
+      "urlLabel": "vagmiai.in"
+    },
+    {
+      "name": "AI Voice Assistant",
+      "description": "AI voice agent configuration, knowledge base, appointment scheduling, outbound calling campaigns and call analytics.",
+      "summary": "Configurable AI voice agents with campaigns and analytics.",
+      "category": "AI",
+      "tags": ["AI", "Voice", "Campaigns", "Scheduling"],
+      "url": "https://ai-voice-prod.uatsystem.com/",
+      "urlLabel": "ai-voice-prod.uatsystem.com"
+    },
+    {
+      "name": "HWS (Health Wealth Safe)",
+      "description": "Healthcare platform for patient records, EMR, billing, chat and video consultations, with patient and staff apps.",
+      "summary": "Healthcare platform for records, billing and video visits.",
+      "category": "Healthcare",
+      "tags": ["Healthcare", "EMR", "Video", "Chat"],
+      "url": "https://www.healthwealthsafe.com/",
+      "urlLabel": "healthwealthsafe.com"
+    },
+    {
+      "name": "VetWise",
+      "description": "24/7 virtual veterinary consultations across Canada with simple 3-step booking.",
+      "summary": "Virtual veterinary consultations with simple booking.",
+      "category": "Healthcare",
+      "tags": ["Telehealth", "Booking", "Web"],
+      "url": "https://getvetwise.com/",
+      "urlLabel": "getvetwise.com"
+    },
+    {
+      "name": "MOF Frontdesk AI portal",
+      "description": "AI agent for booking, cancelling and rescheduling appointments, with call logs, transcriptions, customizable voice and Twilio number purchase.",
+      "summary": "AI front-desk agent for appointment booking.",
+      "category": "Healthcare",
+      "tags": ["AI", "Healthcare", "Scheduling", "Twilio"],
+      "url": "https://ai-uat.medicalofficeforce.co/login",
+      "urlLabel": "ai-uat.medicalofficeforce.co"
+    },
+    {
+      "name": "Quick Hub",
+      "description": "Online reputation management with AI review insights, campaigns, social posts and WhatsApp automation.",
+      "summary": "Reputation management with AI review insights and WhatsApp automation.",
+      "category": "AI",
+      "tags": ["AI", "WhatsApp", "Campaigns"],
+      "url": "https://quickhub.ai/",
+      "urlLabel": "quickhub.ai"
+    },
+    {
+      "name": "Hcomb",
+      "description": "AI-driven hiring and training platform with job matching and AI-powered interviews.",
+      "summary": "AI-driven hiring and training with AI-powered interviews.",
+      "category": "AI",
+      "tags": ["AI", "Hiring", "Training"],
+      "url": "https://www.hcomb.ai/",
+      "urlLabel": "hcomb.ai"
+    },
+    {
+      "name": "CorpRite",
+      "description": "Secure corporate information management for shareholders, directors and executives, with blockchain-backed records.",
+      "summary": "Secure corporate records backed by blockchain.",
+      "category": "Backend/Cloud",
+      "tags": ["Blockchain", "Security", "Records"],
+      "url": "https://corprite.co/",
+      "urlLabel": "corprite.co"
+    },
+    {
+      "name": "AdvancedCare",
+      "description": "AI-powered EHR with telehealth and insurance claims processing.",
+      "summary": "AI-powered EHR with telehealth and claims processing.",
+      "category": "Healthcare",
+      "tags": ["AI", "EHR", "Telehealth", "Insurance claims"],
+      "url": "https://advancedcare.com/",
+      "urlLabel": "advancedcare.com"
+    },
+    {
+      "name": "Yellow Pad",
+      "description": "AI-powered legal document drafting with intelligent templates and smart suggestions.",
+      "summary": "AI legal document drafting with intelligent templates.",
+      "category": "AI",
+      "tags": ["AI", "Legal", "Templates"],
+      "url": "https://www.yellowpad.ai/",
+      "urlLabel": "yellowpad.ai"
+    },
+    {
       "name": "OmniAI Chatbot",
-      "description": "Unified inbox for WhatsApp, Instagram and email with AI replies and Shopify integration.",
+      "description": "Unified inbox for WhatsApp, Instagram and email with AI replies, sentiment detection and Shopify integration.",
       "summary": "Unified inbox for WhatsApp, Instagram and email with AI replies.",
       "category": "AI",
       "tags": ["AI", "WhatsApp", "Instagram", "Shopify"],
@@ -253,22 +287,57 @@
       "urlLabel": "servicenow.com"
     },
     {
-      "name": "Landbot ChatBot",
+      "name": "LandBot ChatBot",
       "description": "Therapist-matching and appointment-booking chatbot with Asana and Zapier integration.",
       "summary": "Therapist-matching and booking chatbot with Asana and Zapier.",
       "category": "AI",
       "tags": ["Chatbot", "Landbot", "Asana", "Zapier"],
       "url": "https://www.flourishtogethertherapy.com/",
       "urlLabel": "flourishtogethertherapy.com"
+    },
+    {
+      "name": "Handytrack",
+      "description": "Mobile app for handyman management with advance, expense and credit tracking, voice-based entry, reminders and WhatsApp sharing.",
+      "summary": "Mobile app for tracking handyman advances and expenses by voice.",
+      "category": "Finance",
+      "tags": ["Mobile", "Voice", "Expenses"]
+    },
+    {
+      "name": "Nivara",
+      "description": "AI-assisted clinical documentation with OPD and queue management, hospital admissions, diagnostics, pharmacy and consent management.",
+      "summary": "AI-assisted clinical documentation and hospital management.",
+      "category": "Healthcare",
+      "tags": ["AI", "Healthcare", "Hospital", "AWS"],
+      "url": "https://app.nivaracare.in/",
+      "urlLabel": "app.nivaracare.in"
+    },
+    {
+      "name": "Bluemind",
+      "description": "Environmental reporting with photo, video and voice, impact mapping, verified reports and an AI environmental assistant.",
+      "summary": "Environmental reporting and impact mapping with an AI assistant.",
+      "category": "AI",
+      "tags": ["AI", "Environment", "Blockchain", "Mobile"],
+      "url": "https://bluemind-web-vercel.app/",
+      "urlLabel": "bluemind-web-vercel.app"
+    },
+    {
+      "name": "Instamd",
+      "description": "Connected care and remote patient monitoring with eligibility, enrollment, consent, claims and outcome management.",
+      "summary": "Remote patient monitoring with enrollment and claims.",
+      "category": "Healthcare",
+      "tags": ["Healthcare", "Remote monitoring", "Claims", "AWS"],
+      "url": "https://instamdinc.com/",
+      "urlLabel": "instamdinc.com"
     }
   ],
   "why": [
-    "8+ years of industry experience",
-    "Expert in AI, backend engineering, and cloud solutions",
-    "Proven track record of delivering scalable and innovative solutions",
-    "Hands-on expertise in AI-driven automation and backend optimizations",
-    "Strong portfolio of healthcare, legal, hiring, and compliance platforms",
-    "Deep understanding of cloud architectures, security, and API integrations",
-    "Proficient in DevOps practices, CI/CD pipelines, and system monitoring"
+    "8+ years of software engineering experience",
+    "Expert in AI agents, agentic workflows, and intelligent automation",
+    "2,000+ Upwork hours delivering real-world software solutions",
+    "End-to-end expertise across AI, backend, APIs, databases, and cloud",
+    "Hands-on experience in Voice AI and real-time conversational systems",
+    "Builder of AI SaaS platforms, copilots, and business automation solutions",
+    "Strong focus on scalability, security, reliability, and performance",
+    "Production-focused approach from AI architecture to deployment"
   ]
 }

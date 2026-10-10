@@ -45,7 +45,7 @@ describe('GET /api/profile', () => {
     expect(res.status).toBe(200);
     const body = await res.json();
     expect(body.name).toBe('Shyamsinh Parmar');
-    expect(body.portfolio).toHaveLength(19);
+    expect(body.portfolio).toHaveLength(23);
     for (const p of body.portfolio) {
       expect(p.summary).toBeTruthy();
       expect(p.category).toBeTruthy();
