@@ -586,3 +586,21 @@ test.describe('portfolio cards', () => {
     expect(Math.round(firstTop)).toBe(Math.round(gridTop));
   });
 });
+
+test.describe('loading and error states', () => {
+  test('profile still renders with no error when the API request fails', async ({ page }) => {
+    await page.route('**/api/profile', (route) => route.abort());
+    await page.goto('./');
+    await expect(page.getByRole('heading', { level: 1 })).toBeVisible();
+    await expect(page.locator('.state-error')).toHaveCount(0);
+  });
+
+  test.describe('without JavaScript', () => {
+    test.use({ javaScriptEnabled: false });
+
+    test('shows the no-script message', async ({ page }) => {
+      await page.goto('./');
+      expect(await page.content()).toContain('This profile page needs JavaScript to be displayed.');
+    });
+  });
+});
