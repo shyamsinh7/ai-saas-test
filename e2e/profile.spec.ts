@@ -143,7 +143,9 @@ test.describe('page shell layout', () => {
     [360, 740],
   ] as const;
   const overflow = (page: Page) =>
-    page.evaluate(() => document.documentElement.scrollWidth - document.documentElement.clientWidth);
+    page.evaluate(
+      () => document.documentElement.scrollWidth - document.documentElement.clientWidth,
+    );
 
   for (const [width, height] of sizes) {
     test(`no horizontal scroll and aligned header, main and footer at ${width}px`, async ({

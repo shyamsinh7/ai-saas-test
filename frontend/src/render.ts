@@ -48,7 +48,12 @@ function section(id: string, heading: string, ...children: Node[]): HTMLElement 
 
 function renderHeader(profile: Profile): HTMLElement {
   const items = profile.contacts.map((c) =>
-    el('li', c.href ? {} : { class: 'no-link' }, `${c.label}: `, c.href ? link(c.href, c.value) : c.value),
+    el(
+      'li',
+      c.href ? {} : { class: 'no-link' },
+      `${c.label}: `,
+      c.href ? link(c.href, c.value) : c.value,
+    ),
   );
   return el(
     'header',
