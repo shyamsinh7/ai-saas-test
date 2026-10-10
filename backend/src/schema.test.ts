@@ -1,4 +1,4 @@
-import { readFileSync } from 'node:fs';
+import { existsSync, readFileSync } from 'node:fs';
 import path from 'node:path';
 import { describe, expect, it } from 'vitest';
 import { parseProfile, profileSchema } from './schema.js';
@@ -24,6 +24,15 @@ describe('data/profile.json', () => {
       expect(p.summary.length).toBeGreaterThan(0);
       expect(p.category.length).toBeGreaterThan(0);
       expect(p.tags.length).toBeGreaterThan(0);
+    }
+  });
+
+  it('gives every project a screenshot that exists under frontend/public', () => {
+    for (const p of parseProfile(raw).portfolio) {
+      expect(p.image, p.name).toBeDefined();
+      expect(existsSync(path.resolve(import.meta.dirname, '../../frontend/public', p.image!))).toBe(
+        true,
+      );
     }
   });
 
@@ -88,4 +97,17 @@ describe('profileSchema', () => {
     expect(profileSchema.safeParse({ ...raw, updatedAt: '6 October 2026' }).success).toBe(false);
     expect(profileSchema.safeParse({ ...raw, updatedAt: '2026-13-45' }).success).toBe(false);
   });
+});
+
+describe('project image', () => {
+  it('accepts a relative image path', () => {
+    expect(profileSchema.safeParse(withProject0({ image: 'projects/a.jpg' })).success).toBe(true);
+  });
+
+  it.each(['javascript:alert(1)', '//evil.example/x.jpg', '../x.jpg', '/abs.jpg', ''])(
+    'rejects the unsafe image %j',
+    (image) => {
+      expect(profileSchema.safeParse(withProject0({ image })).success).toBe(false);
+    },
+  );
 });

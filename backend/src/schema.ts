@@ -5,6 +5,10 @@ const href = z
   .string()
   .regex(/^(https?:\/\/|mailto:|tel:)\S+$/, 'must be an http(s), mailto or tel link');
 
+const imagePath = z
+  .string()
+  .regex(/^[\w-]+(\/[\w-]+)*\.(jpe?g|png|webp)$/, 'must be a relative path to a jpg, png or webp');
+
 const isoDate = z.iso.date();
 
 export const profileSchema = z.object({
@@ -28,6 +32,7 @@ export const profileSchema = z.object({
         tags: z.array(text).min(1),
         url: z.url({ protocol: /^https?$/ }).optional(),
         urlLabel: text.optional(),
+        image: imagePath.optional(),
       }),
     )
     .min(1),
