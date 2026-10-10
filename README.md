@@ -140,6 +140,12 @@ Rules kept when changing tokens (`frontend/src/tokens.test.ts` checks the colour
   Any new transition must be covered by that block.
 - Elements with the `hidden` attribute stay hidden (keep the `[hidden]` overrides).
 
+## Page shell and contacts
+
+- Header, TOC, main and footer share `--page-width` (960px, 1040px from 1280px) and `--page-pad` (`clamp(1rem, 4vw, 2rem)`), so they line up at every width.
+- Breakpoints are mobile-first `min-width` queries at 768px and 1280px; 360–480px phones use the base styles.
+- Contacts wrap in a flex list. Linked contacts are underlined with a 44px-high target. Contacts without an `href` in `data/profile.json` (e.g. LinkedIn, Upwork, Fiverr) render as plain muted text with the `no-link` class.
+
 ## npm scripts
 
 | Script              | What it does                                                             |
