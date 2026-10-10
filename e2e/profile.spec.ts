@@ -1,4 +1,12 @@
-import { expect, test } from '@playwright/test';
+import { readFileSync } from 'node:fs';
+import { expect, test, type Page } from '@playwright/test';
+
+type Project = { name: string; category: string };
+const projects: Project[] = JSON.parse(readFileSync('data/profile.json', 'utf8')).portfolio;
+const categories = [...new Set(projects.map((p) => p.category))];
+const total = projects.length;
+const inCategory = (c: string) => projects.filter((p) => p.category === c).length;
+const [known = '', other = ''] = categories;
 
 test.beforeEach(async ({ page }) => {
   await page.goto('./');
@@ -45,7 +53,10 @@ test('My Portfolio section lists the projects with links', async ({ page }) => {
   await expect(
     portfolio.getByRole('heading', { name: 'My Portfolio (19 projects)' }),
   ).toBeVisible();
-  await expect(portfolio.locator('article')).toHaveCount(19);
+  await expect(portfolio.locator('article')).toHaveCount(total);
+  const card = portfolio.locator('article', { hasText: 'HWS (Health Wealth Safe)' });
+  await expect(card.getByRole('heading', { level: 3 })).toHaveText('HWS (Health Wealth Safe)');
+  await expect(card.locator('.badge')).toHaveText('Healthcare');
   await expect(portfolio.getByRole('link', { name: 'healthwealthsafe.com' })).toHaveAttribute(
     'href',
     'https://www.healthwealthsafe.com/',
@@ -144,5 +155,108 @@ test.describe('skills filter', () => {
     await page.locator('#skills').getByLabel('Filter skills').fill('zzzz');
     await page.getByRole('navigation').getByRole('link', { name: 'Core Skills' }).click();
     await expect(page).toHaveURL(/#skills$/);
+  });
+});
+
+test.describe('portfolio filter', () => {
+  const group = (page: Page) =>
+    page.locator('#portfolio').getByRole('group', { name: 'Filter projects by category' });
+  // The pressed button gets a CSS checkmark prefix in its accessible name ("✓ All").
+  const button = (page: Page, name: string) =>
+    group(page).getByRole('button', {
+      name: new RegExp(`^(✓ )?${name.replace(/[.*+?^${}()|[\]\\/]/g, '\\$&')}$`),
+    });
+  const cards = (page: Page) => page.locator('#portfolio article');
+  const status = (page: Page) => page.locator('#portfolio').getByRole('status');
+
+  async function expectOnly(page: Page, category: string | null) {
+    for (const p of projects) {
+      const card = cards(page).filter({
+        has: page.getByRole('heading', { name: p.name, exact: true }),
+      });
+      if (!category || p.category === category) await expect(card).toBeVisible();
+      else await expect(card).toBeHidden();
+    }
+  }
+
+  test('lists a button per category read from the data, plus All', async ({ page }) => {
+    await expect(group(page).getByRole('button')).toHaveText([/^(✓ )?All$/, ...categories]);
+    await expect(button(page, 'All')).toHaveAttribute('aria-pressed', 'true');
+  });
+
+  test('clicking a category shows only matching cards, updates the count and the URL', async ({
+    page,
+  }) => {
+    for (const category of categories) {
+      await button(page, category).click();
+      await expect(button(page, category)).toHaveAttribute('aria-pressed', 'true');
+      await expect(button(page, 'All')).toHaveAttribute('aria-pressed', 'false');
+      await expect(status(page)).toHaveText(`Showing ${inCategory(category)} of ${total} projects`);
+      await expect(page).toHaveURL(new RegExp(`[?&]category=${encodeURIComponent(category)}`));
+      await expectOnly(page, category);
+    }
+    await button(page, 'All').click();
+    await expect(status(page)).toHaveText(`Showing ${total} of ${total} projects`);
+    await expect(page).not.toHaveURL(/[?&]category=/);
+    await expectOnly(page, null);
+  });
+
+  test('a known ?category= deep link is applied on load', async ({ page }) => {
+    await page.goto(`./?category=${encodeURIComponent(known)}`);
+    await expect(button(page, known)).toHaveAttribute('aria-pressed', 'true');
+    for (const other of ['All', ...categories.filter((c) => c !== known)]) {
+      await expect(button(page, other)).toHaveAttribute('aria-pressed', 'false');
+    }
+    await expect(status(page)).toHaveText(`Showing ${inCategory(known)} of ${total} projects`);
+    await expectOnly(page, known);
+  });
+
+  test('an unknown ?category= falls back to All', async ({ page }) => {
+    await page.goto('./?category=bogus');
+    await expect(button(page, 'All')).toHaveAttribute('aria-pressed', 'true');
+    await expect(status(page)).toHaveText(`Showing ${total} of ${total} projects`);
+    await expectOnly(page, null);
+  });
+
+  test('works with the keyboard: Enter and Space apply the filter and focus stays', async ({
+    page,
+  }) => {
+    await expect(group(page)).toBeVisible();
+    await button(page, 'All').focus();
+    await page.keyboard.press('Tab');
+    const first = button(page, known);
+    await expect(first).toBeFocused();
+    await page.keyboard.press('Enter');
+    await expect(first).toHaveAttribute('aria-pressed', 'true');
+    await expect(first).toBeFocused();
+    await expectOnly(page, known);
+
+    await page.keyboard.press('Tab');
+    const second = button(page, other);
+    await expect(second).toBeFocused();
+    await page.keyboard.press('Space');
+    await expect(second).toHaveAttribute('aria-pressed', 'true');
+    await expect(second).toBeFocused();
+    await expectOnly(page, other);
+  });
+
+  test('on a 360px phone the buttons wrap and the page does not scroll sideways', async ({
+    page,
+  }) => {
+    await page.setViewportSize({ width: 360, height: 740 });
+    await button(page, known).click();
+    await expectOnly(page, known);
+    const overflow = await page.evaluate(
+      () => document.documentElement.scrollWidth - document.documentElement.clientWidth,
+    );
+    expect(overflow).toBeLessThanOrEqual(0);
+    const boxes = await group(page)
+      .getByRole('button')
+      .evaluateAll((els) => els.map((e) => e.getBoundingClientRect()));
+    for (const b of boxes) {
+      expect(b.left).toBeGreaterThanOrEqual(0);
+      expect(b.right).toBeLessThanOrEqual(360);
+    }
+    expect(new Set(boxes.map((b) => Math.round(b.top))).size).toBeGreaterThan(1);
   });
 });
