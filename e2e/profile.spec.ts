@@ -586,3 +586,33 @@ test.describe('portfolio cards', () => {
     expect(Math.round(firstTop)).toBe(Math.round(gridTop));
   });
 });
+
+test.describe('loading and error states', () => {
+  test('profile still renders with no error when the API request fails', async ({ page }) => {
+    await page.route('**/api/profile', (route) => route.abort());
+    await page.goto('./');
+    await expect(page.getByRole('heading', { level: 1 })).toBeVisible();
+    await expect(page.locator('.state-error')).toHaveCount(0);
+  });
+
+  test('loading skeleton does not animate with reduced motion', async ({ page }) => {
+    await page.emulateMedia({ reducedMotion: 'reduce' });
+    await page.route('**/api/profile', async (route) => {
+      await new Promise((resolve) => setTimeout(resolve, 1500));
+      await route.continue();
+    });
+    await page.goto('./');
+    const skeleton = page.locator('.skeleton').first();
+    await expect(skeleton).toBeAttached();
+    await expect(skeleton).toHaveCSS('animation-name', 'none');
+  });
+
+  test.describe('without JavaScript', () => {
+    test.use({ javaScriptEnabled: false });
+
+    test('shows the no-script message', async ({ page }) => {
+      await page.goto('./');
+      expect(await page.content()).toContain('This profile page needs JavaScript to be displayed.');
+    });
+  });
+});

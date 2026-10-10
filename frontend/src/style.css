@@ -574,3 +574,85 @@ h1:focus {
 .portfolio-status {
   margin: 0 0 var(--space-4);
 }
+
+.state {
+  max-width: var(--page-width);
+  margin: var(--space-7) auto;
+  padding: var(--space-5) var(--page-pad);
+}
+
+.state-text {
+  margin: 0 0 var(--space-4);
+  color: var(--muted);
+}
+
+.skeleton {
+  height: 1rem;
+  margin-bottom: var(--space-3);
+  border-radius: var(--radius-sm);
+  background: linear-gradient(90deg, var(--surface-tint), var(--border), var(--surface-tint));
+  background-size: 200% 100%;
+  animation: shimmer 1.4s linear infinite;
+}
+
+.skeleton-wide {
+  width: 100%;
+}
+
+.skeleton-narrow {
+  width: 60%;
+}
+
+@keyframes shimmer {
+  from {
+    background-position: 200% 0;
+  }
+  to {
+    background-position: -200% 0;
+  }
+}
+
+.state-error {
+  background: var(--surface-tint);
+  border: 2px solid var(--border-strong);
+  border-radius: var(--radius-md);
+}
+
+.state-title {
+  margin: 0 0 var(--space-3);
+  color: var(--accent);
+  font-size: var(--fs-h2);
+  line-height: var(--lh-tight);
+}
+
+.retry-btn {
+  min-height: 44px;
+  min-width: 44px;
+  padding: var(--space-2) var(--space-4);
+  font: inherit;
+  font-weight: 600;
+  color: var(--on-link);
+  background: var(--link);
+  border: 0;
+  border-radius: var(--radius-pill);
+  cursor: pointer;
+}
+
+.retry-btn:hover {
+  background: var(--focus-ring);
+}
+
+.retry-btn:active {
+  background: var(--link-pressed);
+}
+
+.retry-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.retry-btn:focus-visible {
+  outline: 3px solid var(--focus-ring);
+  outline-offset: 2px;
+  box-shadow: 0 0 0 5px var(--focus-ring-halo);
+}
