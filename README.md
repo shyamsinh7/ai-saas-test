@@ -33,6 +33,8 @@ and must be non-empty):
   `Finance`, `Backend/Cloud`). Reuse existing spellings so categories do not split.
 - `tags`: required array of at least one non-empty tech tag.
 - `url`: optional http(s) link. `urlLabel`: optional link text.
+- `image`: optional screenshot, a relative path to a `.jpg`, `.jpeg`, `.png` or `.webp` file in
+  `frontend/public` (e.g. `projects/hws.jpg`). Absolute paths, `//host`, `../` and URLs are rejected.
 
 To add a project, append an object with all the required fields to `portfolio`. If a required field
 is missing the schema rejects the data, `GET /api/profile` returns 500 and the bundled page fails.
@@ -42,6 +44,8 @@ is missing the schema rejects the data, `GET /api/profile` returns 500 and the b
 Each `portfolio` entry renders as an `article.card.project` in the `#portfolio .grid`, built from
 `data/profile.json` (see above):
 
+- `image`, when set, adds an `img` at the top of the card (alt text "<name> screenshot", lazy
+  loaded, cropped to the top 160px). A project without `image` shows no picture.
 - `name` (h3), `summary`, a `category` badge and the `tags` as a `ul`/`li` list. The card also
   carries `data-category`.
 - `url` adds a link with the `urlLabel` (or the url) as text; its accessible name also contains the
