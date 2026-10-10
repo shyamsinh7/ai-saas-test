@@ -69,7 +69,8 @@ A table of contents (`<nav aria-label="Table of contents">`) sits directly under
 three links in page order: About Me (`#about`), Core Skills (`#skills`) and My Portfolio
 (`#portfolio`). The labels are fixed and do not follow the section headings. The sections always
 render, so the links never dangle; "Why Work with Me?" and the contact links are not linked. The
-links wrap onto several lines on narrow screens, and scrolling uses the page-wide smooth-scroll
+links are pills with a 44px touch target and hover, keyboard-focus and pressed states. They wrap
+onto several lines on narrow screens (no horizontal scroll at 375px), and scrolling uses the page-wide smooth-scroll
 rule (instant when the visitor prefers reduced motion).
 
 ## Back to top button
@@ -77,7 +78,8 @@ rule (instant when the visitor prefers reduced motion).
 A "Back to top" button (`frontend/src/backToTop.ts`) is fixed to the bottom-right corner. It is
 hidden until the visitor has scrolled down more than one screen height. Clicking it scrolls to the
 top (instantly when the visitor prefers reduced motion, smoothly otherwise) and moves keyboard focus
-to the page heading.
+to the page heading. It is a 44px target with hover, focus and pressed states, sits above the
+safe-area inset and below the skip link, and the footer leaves room so it never covers footer text.
 
 ## Skills filter
 
