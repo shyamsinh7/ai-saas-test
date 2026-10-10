@@ -454,3 +454,135 @@ test.describe('portfolio filter', () => {
     expect(new Set(boxes.map((b) => Math.round(b.top))).size).toBeGreaterThan(1);
   });
 });
+
+test.describe('portfolio cards', () => {
+  const cards = (page: Page) => page.locator('#portfolio article.project');
+
+  for (const [width, columns] of [
+    [1440, 3],
+    [768, 2],
+    [375, 1],
+  ] as const) {
+    test(`renders ${total} consistent cards in ${columns} column(s) at ${width}px`, async ({
+      page,
+    }) => {
+      await page.setViewportSize({ width, height: 900 });
+      await expect(cards(page)).toHaveCount(total);
+      const info = await cards(page).evaluateAll((els) =>
+        els.map((e) => ({
+          badge: !!e.querySelector('.badge'),
+          h3: !!e.querySelector('h3'),
+          summary: !!e.querySelector('p.summary'),
+          tags: e.querySelectorAll('ul.tags li').length,
+          imgH: e.querySelector('img')?.getBoundingClientRect().height ?? null,
+          left: Math.round(e.getBoundingClientRect().left),
+        })),
+      );
+      for (const c of info) {
+        expect(c.badge && c.h3 && c.summary).toBe(true);
+        expect(c.tags).toBeGreaterThan(0);
+      }
+      const heights = new Set(info.filter((c) => c.imgH !== null).map((c) => c.imgH));
+      expect(heights.size).toBe(1);
+      expect(new Set(info.map((c) => c.left)).size).toBe(columns);
+    });
+  }
+
+  test('the image area is reserved before the image loads (no layout shift)', async ({ page }) => {
+    const first = cards(page).first();
+    const next = cards(page).nth(3);
+    await first.scrollIntoViewIfNeeded();
+    const img = first.locator('img');
+    await img.evaluate((i: HTMLImageElement) => i.decode?.().catch(() => undefined));
+    const before = await next.boundingBox();
+    // An image-less state: hide the picture and compare the reserved box is unchanged in size.
+    const box = await img.boundingBox();
+    expect(box?.height).toBeGreaterThan(40);
+    const reserved = await img.evaluate((i) => {
+      const s = getComputedStyle(i);
+      return s.aspectRatio !== 'auto' || s.height !== 'auto';
+    });
+    expect(reserved).toBe(true);
+    const after = await next.boundingBox();
+    expect(after?.y).toBe(before?.y);
+    expect(after?.height).toBe(before?.height);
+  });
+
+  test('the selected category is marked by checkmark and underline, not colour alone', async ({
+    page,
+  }) => {
+    const btn = page.locator('#portfolio .filter-btn', { hasText: known }).first();
+    await btn.click();
+    await expect(btn).toHaveAttribute('aria-pressed', 'true');
+    await expect(
+      page.locator('#portfolio').getByRole('button', {
+        name: new RegExp(`^✓ ${known.replace(/[.*+?^${}()|[\]\\/]/g, '\\$&')}$`),
+      }),
+    ).toBeVisible();
+    expect(await btn.evaluate((e) => getComputedStyle(e).textDecorationLine)).toContain(
+      'underline',
+    );
+    await expect(page.locator('#portfolio-status')).toHaveText(
+      `Showing ${inCategory(known)} of ${total} projects`,
+    );
+  });
+
+  test('hovering a card changes its border; reduced motion removes the transition', async ({
+    page,
+  }) => {
+    const card = cards(page).first();
+    const border = () => card.evaluate((e) => getComputedStyle(e).borderTopColor);
+    const rest = await border();
+    await card.hover();
+    await page.waitForTimeout(300);
+    expect(await border()).not.toBe(rest);
+    await page.emulateMedia({ reducedMotion: 'reduce' });
+    expect(await card.evaluate((e) => getComputedStyle(e).transitionDuration)).toBe('0s');
+  });
+
+  test('hovering a project link keeps it underlined with a thicker line', async ({ page }) => {
+    const link = cards(page).locator('a').first();
+    await link.hover();
+    await page.waitForTimeout(300);
+    expect(await link.evaluate((e) => getComputedStyle(e).textDecorationLine)).toContain(
+      'underline',
+    );
+  });
+
+  for (const width of [360, 390]) {
+    test(`category buttons are 44px tall and do not overflow at ${width}px`, async ({ page }) => {
+      await page.setViewportSize({ width, height: 800 });
+      const sizes = await page.locator('#portfolio .filter-btn').evaluateAll((els) =>
+        els.map((e) => ({
+          h: e.getBoundingClientRect().height,
+          r: e.getBoundingClientRect().right,
+        })),
+      );
+      for (const s of sizes) {
+        expect(s.h).toBeGreaterThanOrEqual(44);
+        expect(s.r).toBeLessThanOrEqual(width);
+      }
+      const group = page.locator('#portfolio .portfolio-filter');
+      expect(await group.evaluate((e) => e.scrollWidth <= e.clientWidth)).toBe(true);
+    });
+  }
+
+  test('filtered-out cards take no space: the first visible card sits at the grid top', async ({
+    page,
+  }) => {
+    await page.locator('#portfolio .filter-btn', { hasText: known }).first().click();
+    const hidden = await cards(page).evaluateAll((els) =>
+      els.filter((e) => e.hasAttribute('hidden')).map((e) => getComputedStyle(e).display),
+    );
+    expect(hidden.length).toBe(total - inCategory(known));
+    expect(new Set(hidden)).toEqual(new Set(['none']));
+    const gridTop = await page
+      .locator('#portfolio .grid')
+      .evaluate((e) => e.getBoundingClientRect().top);
+    const firstTop = await cards(page)
+      .locator('visible=true')
+      .first()
+      .evaluate((e) => e.getBoundingClientRect().top);
+    expect(Math.round(firstTop)).toBe(Math.round(gridTop));
+  });
+});

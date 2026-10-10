@@ -298,13 +298,14 @@ ul.plain {
   display: block;
   width: 100%;
   max-width: 100%;
-  height: 160px;
+  aspect-ratio: 16 / 5;
+  height: auto;
   margin: 0 0 var(--space-3);
   border: 1px solid var(--border);
   border-radius: var(--radius-sm);
   object-fit: cover;
   object-position: top;
-  background: var(--surface-tint);
+  background: var(--tag-bg);
 }
 
 .project h3 {
@@ -312,8 +313,36 @@ ul.plain {
   color: var(--accent);
 }
 
+/* Portfolio cards are a little narrower than other cards: 3 columns at desktop, 2 at 768, 1 on phones. */
+#portfolio .grid {
+  grid-template-columns: repeat(auto-fill, minmax(min(260px, 100%), 1fr));
+}
+
 .project {
+  display: flex;
+  flex-direction: column;
   min-width: 0;
+  transition:
+    border-color 150ms,
+    box-shadow 150ms;
+}
+
+.project:hover,
+.project:focus-within {
+  border-color: var(--accent);
+  box-shadow: var(--shadow-md);
+}
+
+.project a {
+  margin-top: auto;
+  padding-top: var(--space-2);
+  text-underline-offset: 3px;
+  transition: text-decoration-thickness 150ms;
+}
+
+.project a:hover {
+  color: var(--link-pressed);
+  text-decoration-thickness: 2px;
 }
 
 .project h3,
@@ -492,6 +521,7 @@ h1:focus {
 
 .portfolio-filter {
   display: flex;
+  min-width: 0;
   flex-wrap: wrap;
   gap: var(--space-2);
   margin-bottom: var(--space-3);
@@ -504,9 +534,29 @@ h1:focus {
   font: inherit;
   color: inherit;
   background: var(--surface);
-  border: 2px solid currentColor;
+  border: 2px solid var(--border-strong);
   border-radius: var(--radius-pill);
   cursor: pointer;
+  max-width: 100%;
+  overflow-wrap: anywhere;
+  transition:
+    background-color 120ms,
+    border-color 120ms;
+}
+
+.filter-btn:hover {
+  background: var(--badge-bg);
+  border-color: var(--link);
+}
+
+.filter-btn:active {
+  background: var(--selected-bg);
+  border-color: var(--focus-ring);
+}
+
+.filter-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
 }
 
 .filter-btn[aria-pressed='true'] {

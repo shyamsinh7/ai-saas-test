@@ -45,14 +45,19 @@ Each `portfolio` entry renders as an `article.card.project` in the `#portfolio .
 `data/profile.json` (see above):
 
 - `image`, when set, adds an `img` at the top of the card (alt text "<name> screenshot", lazy
-  loaded, cropped to the top 160px). A project without `image` shows no picture.
+  loaded, cropped to the top). The image area has a fixed 16:5 aspect ratio on a tinted placeholder,
+  so lazy loading never shifts the layout. A project without `image` shows no picture.
 - `name` (h3), `summary`, a `category` badge and the `tags` as a `ul`/`li` list. The card also
   carries `data-category`.
 - `url` adds a link with the `urlLabel` (or the url) as text; its accessible name also contains the
   project name. http(s) links get `rel="noopener"`.
 - A project without `url` shows no link at all.
 - Long text and many tags wrap inside the card, so there is no horizontal scroll at 360px. The
-  tag and badge colours meet WCAG AA contrast (4.5:1).
+  tag and badge colours meet WCAG AA contrast (4.5:1): badge #0b3d63 on #e3f0f9, tags #333 on #eef1f4.
+- The grid has a 260px minimum column (3 columns at 1280-1440px, 2 at 768px, 1 on phones). Cards are
+  flex columns, so links line up at the bottom of each row.
+- Hovering or keyboard-focusing a card (or its link) gives a subtle accent border and shadow, and
+  the link's underline thickens. These transitions are disabled under reduced motion.
 
 ## Last updated date
 
@@ -101,7 +106,8 @@ A row of buttons (`frontend/src/portfolioFilter.ts`) above the portfolio cards s
 button per category found in the data (first-seen order, never an empty category). Clicking a button
 (or pressing Enter/Space on it) shows only that category's projects; the others get the `hidden`
 attribute and are never removed. The active button has `aria-pressed="true"` and a checkmark and
-underline, so it is not shown by colour alone. A polite live region (`role="status"`) reports e.g.
+underline (plus bold and a tint), so it is not shown by colour alone. Buttons are at least 44px tall,
+have hover, pressed and disabled styles, and wrap within the row (no sideways scroll at 360px). A polite live region (`role="status"`) reports e.g.
 "Showing 5 of 23 projects"; focus does not move. The section heading keeps the total. Without
 JavaScript every card stays visible. No row is rendered when there are no projects.
 
