@@ -126,7 +126,79 @@ test('table of contents links scroll to their sections', async ({ page }) => {
 test('skip link is the first thing Tab reaches', async ({ page }) => {
   await expect(page.getByRole('heading', { level: 1 })).toBeVisible();
   await page.keyboard.press('Tab');
-  await expect(page.getByRole('link', { name: 'Skip to content' })).toBeFocused();
+  const skip = page.getByRole('link', { name: 'Skip to content' });
+  await expect(skip).toBeFocused();
+  await expect(skip).toBeInViewport();
+  const box = await skip.boundingBox();
+  expect(box!.x).toBeGreaterThanOrEqual(0);
+});
+
+test.describe('page shell layout', () => {
+  const sizes = [
+    [1440, 900],
+    [1280, 800],
+    [768, 1024],
+    [390, 844],
+    [375, 812],
+    [360, 740],
+  ] as const;
+  const overflow = (page: Page) =>
+    page.evaluate(
+      () => document.documentElement.scrollWidth - document.documentElement.clientWidth,
+    );
+
+  for (const [width, height] of sizes) {
+    test(`no horizontal scroll and aligned header, main and footer at ${width}px`, async ({
+      page,
+    }) => {
+      await page.setViewportSize({ width, height });
+      await expect(page.getByRole('heading', { level: 1 })).toBeVisible();
+      expect(await overflow(page)).toBeLessThanOrEqual(0);
+      const [header, main, footer] = await Promise.all(
+        ['header', 'main', 'footer'].map((t) => page.locator(t).boundingBox()),
+      );
+      expect(main!.x).toBe(header!.x);
+      expect(main!.width).toBe(header!.width);
+      expect(footer!.x).toBe(header!.x);
+      expect(footer!.width).toBe(header!.width);
+    });
+  }
+
+  test('linked contacts are at least 44px high', async ({ page }) => {
+    const links = page.locator('#contact a');
+    await expect(links.first()).toBeVisible();
+    for (const link of await links.all()) {
+      expect((await link.boundingBox())!.height).toBeGreaterThanOrEqual(44);
+    }
+  });
+
+  test('contacts without a link look different from linked ones', async ({ page }) => {
+    const plain = page.locator('#contact li.no-link').first();
+    await expect(plain).toBeVisible();
+    const style = await plain.evaluate((e) => {
+      const c = getComputedStyle(e);
+      return { line: c.textDecorationLine, cursor: c.cursor };
+    });
+    expect(style.line).toBe('none');
+    expect(style.cursor).not.toBe('pointer');
+    const linked = await page
+      .locator('#contact a')
+      .first()
+      .evaluate((e) => getComputedStyle(e).textDecorationLine);
+    expect(linked).toContain('underline');
+  });
+
+  test('very long name and contact values wrap instead of overflowing', async ({ page }) => {
+    await page.setViewportSize({ width: 360, height: 740 });
+    await expect(page.getByRole('heading', { level: 1 })).toBeVisible();
+    await page.evaluate(() => {
+      const long = 'x'.repeat(200);
+      document.querySelector('header h1')!.textContent = long;
+      document.querySelector('#contact li.no-link')!.textContent = `Label: ${long}`;
+      document.querySelector('#contact a')!.textContent = long;
+    });
+    expect(await overflow(page)).toBeLessThanOrEqual(0);
+  });
 });
 
 test.describe('skills filter', () => {

@@ -31,6 +31,18 @@ describe('renderProfile', () => {
     expect(root.querySelectorAll('#contact li')).toHaveLength(data.contacts.length);
   });
 
+  it('contacts without a link render as plain text with the no-link class', () => {
+    const lis = [...root.querySelectorAll<HTMLElement>('#contact li')];
+    expect(lis).toHaveLength(data.contacts.length);
+    data.contacts.forEach((c, i) => {
+      const li = lis[i]!;
+      expect(li.classList.contains('no-link')).toBe(!c.href);
+      expect(li.querySelector('a') === null).toBe(!c.href);
+      expect(li.textContent).toBe(`${c.label}: ${c.value}`);
+    });
+    expect(root.querySelectorAll('#contact li.no-link').length).toBeGreaterThan(0);
+  });
+
   it('renders the About Me section', () => {
     const about = root.querySelector('#about')!;
     expect(about.querySelector('h2')?.textContent).toBe('About Me');
