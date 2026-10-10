@@ -118,6 +118,24 @@ describe('renderProfile', () => {
       });
     });
 
+    it('shows each project screenshot as a lazy-loaded image with alt text', () => {
+      cards().forEach((card, i) => {
+        const p = data.portfolio[i]!;
+        const img = card.querySelector('img');
+        expect(img?.getAttribute('src')).toBe(p.image);
+        expect(img?.getAttribute('alt')).toBe(`${p.name} screenshot`);
+        expect(img?.getAttribute('loading')).toBe('lazy');
+      });
+    });
+
+    it('renders no image for a project without one', () => {
+      renderProfile(root, {
+        ...data,
+        portfolio: [{ ...data.portfolio[0]!, image: undefined }],
+      });
+      expect(root.querySelector('#portfolio article img')).toBeNull();
+    });
+
     it('renders no anchor for a project without a url', () => {
       const idx = data.portfolio.findIndex((p) => p.name.includes('Handytrack'));
       expect(idx).toBeGreaterThanOrEqual(0);
@@ -161,7 +179,7 @@ describe('renderProfile', () => {
 
   it('treats profile text as text, not HTML', () => {
     renderProfile(root, { ...data, name: '<img src=x onerror=alert(1)>' });
-    expect(root.querySelector('img')).toBeNull();
+    expect(root.querySelector('header img')).toBeNull();
     expect(root.querySelector('h1')?.textContent).toBe('<img src=x onerror=alert(1)>');
   });
 });

@@ -131,7 +131,8 @@
       "category": "AI",
       "tags": ["AI", "Voice", "Chatbot", "Analytics"],
       "url": "https://aivachat.io/",
-      "urlLabel": "aivachat.io"
+      "urlLabel": "aivachat.io",
+      "image": "projects/aiva-chat.jpg"
     },
     {
       "name": "AI Phone CRM",
@@ -140,7 +141,8 @@
       "category": "AI",
       "tags": ["AI", "Voice", "CRM", "Twilio"],
       "url": "https://thalwai.com/",
-      "urlLabel": "thalwai.com"
+      "urlLabel": "thalwai.com",
+      "image": "projects/ai-phone-crm.jpg"
     },
     {
       "name": "PCO Intelligence",
@@ -149,7 +151,8 @@
       "category": "Backend/Cloud",
       "tags": ["AWS", "Amazon Lex", "Amazon Connect", "Widgets"],
       "url": "https://pcointelligence.com/",
-      "urlLabel": "pcointelligence.com"
+      "urlLabel": "pcointelligence.com",
+      "image": "projects/pco-intelligence.jpg"
     },
     {
       "name": "Sydon AI",
@@ -158,7 +161,8 @@
       "category": "AI",
       "tags": ["AI", "Amazon", "Automation", "Analytics"],
       "url": "https://sydon.ai/",
-      "urlLabel": "sydon.ai"
+      "urlLabel": "sydon.ai",
+      "image": "projects/sydon-ai.jpg"
     },
     {
       "name": "Goodfin AI",
@@ -167,7 +171,8 @@
       "category": "Finance",
       "tags": ["AI", "Finance", "Conversational"],
       "url": "https://www.goodfin.com/",
-      "urlLabel": "goodfin.com"
+      "urlLabel": "goodfin.com",
+      "image": "projects/goodfin-ai.jpg"
     },
     {
       "name": "Reknew AI",
@@ -176,7 +181,8 @@
       "category": "AI",
       "tags": ["AI", "Data", "Automation"],
       "url": "https://reknew.ai/",
-      "urlLabel": "reknew.ai"
+      "urlLabel": "reknew.ai",
+      "image": "projects/reknew-ai.jpg"
     },
     {
       "name": "Vagmi AI",
@@ -185,7 +191,8 @@
       "category": "Healthcare",
       "tags": ["AI", "Voice", "Healthcare", "Scheduling"],
       "url": "https://vagmiai.in/",
-      "urlLabel": "vagmiai.in"
+      "urlLabel": "vagmiai.in",
+      "image": "projects/vagmi-ai.jpg"
     },
     {
       "name": "AI Voice Assistant",
@@ -194,7 +201,8 @@
       "category": "AI",
       "tags": ["AI", "Voice", "Campaigns", "Scheduling"],
       "url": "https://ai-voice-prod.uatsystem.com/",
-      "urlLabel": "ai-voice-prod.uatsystem.com"
+      "urlLabel": "ai-voice-prod.uatsystem.com",
+      "image": "projects/ai-voice-assistant.jpg"
     },
     {
       "name": "HWS (Health Wealth Safe)",
@@ -203,7 +211,8 @@
       "category": "Healthcare",
       "tags": ["Healthcare", "EMR", "Video", "Chat"],
       "url": "https://www.healthwealthsafe.com/",
-      "urlLabel": "healthwealthsafe.com"
+      "urlLabel": "healthwealthsafe.com",
+      "image": "projects/hws.jpg"
     },
     {
       "name": "VetWise",
@@ -212,7 +221,8 @@
       "category": "Healthcare",
       "tags": ["Telehealth", "Booking", "Web"],
       "url": "https://getvetwise.com/",
-      "urlLabel": "getvetwise.com"
+      "urlLabel": "getvetwise.com",
+      "image": "projects/vetwise.jpg"
     },
     {
       "name": "MOF Frontdesk AI portal",
@@ -221,7 +231,8 @@
       "category": "Healthcare",
       "tags": ["AI", "Healthcare", "Scheduling", "Twilio"],
       "url": "https://ai-uat.medicalofficeforce.co/login",
-      "urlLabel": "ai-uat.medicalofficeforce.co"
+      "urlLabel": "ai-uat.medicalofficeforce.co",
+      "image": "projects/mof-frontdesk.jpg"
     },
     {
       "name": "Quick Hub",
@@ -230,7 +241,8 @@
       "category": "AI",
       "tags": ["AI", "WhatsApp", "Campaigns"],
       "url": "https://quickhub.ai/",
-      "urlLabel": "quickhub.ai"
+      "urlLabel": "quickhub.ai",
+      "image": "projects/quick-hub.jpg"
     },
     {
       "name": "Hcomb",
@@ -239,7 +251,8 @@
       "category": "AI",
       "tags": ["AI", "Hiring", "Training"],
       "url": "https://www.hcomb.ai/",
-      "urlLabel": "hcomb.ai"
+      "urlLabel": "hcomb.ai",
+      "image": "projects/hcomb.jpg"
     },
     {
       "name": "CorpRite",
@@ -248,7 +261,8 @@
       "category": "Backend/Cloud",
       "tags": ["Blockchain", "Security", "Records"],
       "url": "https://corprite.co/",
-      "urlLabel": "corprite.co"
+      "urlLabel": "corprite.co",
+      "image": "projects/corprite.jpg"
     },
     {
       "name": "AdvancedCare",
@@ -257,7 +271,8 @@
       "category": "Healthcare",
       "tags": ["AI", "EHR", "Telehealth", "Insurance claims"],
       "url": "https://advancedcare.com/",
-      "urlLabel": "advancedcare.com"
+      "urlLabel": "advancedcare.com",
+      "image": "projects/advancedcare.jpg"
     },
     {
       "name": "Yellow Pad",
@@ -266,7 +281,8 @@
       "category": "AI",
       "tags": ["AI", "Legal", "Templates"],
       "url": "https://www.yellowpad.ai/",
-      "urlLabel": "yellowpad.ai"
+      "urlLabel": "yellowpad.ai",
+      "image": "projects/yellow-pad.jpg"
     },
     {
       "name": "OmniAI Chatbot",
@@ -275,7 +291,8 @@
       "category": "AI",
       "tags": ["AI", "WhatsApp", "Instagram", "Shopify"],
       "url": "https://omniaichatbot.com/",
-      "urlLabel": "omniaichatbot.com"
+      "urlLabel": "omniaichatbot.com",
+      "image": "projects/omniai-chatbot.jpg"
     },
     {
       "name": "ServiceNow Dashboard",
@@ -284,7 +301,8 @@
       "category": "Backend/Cloud",
       "tags": ["ServiceNow", "Dashboards", "Reporting"],
       "url": "https://www.servicenow.com/",
-      "urlLabel": "servicenow.com"
+      "urlLabel": "servicenow.com",
+      "image": "projects/servicenow-dashboard.jpg"
     },
     {
       "name": "LandBot ChatBot",
@@ -293,14 +311,16 @@
       "category": "AI",
       "tags": ["Chatbot", "Landbot", "Asana", "Zapier"],
       "url": "https://www.flourishtogethertherapy.com/",
-      "urlLabel": "flourishtogethertherapy.com"
+      "urlLabel": "flourishtogethertherapy.com",
+      "image": "projects/landbot-chatbot.jpg"
     },
     {
       "name": "Handytrack",
       "description": "Mobile app for handyman management with advance, expense and credit tracking, voice-based entry, reminders and WhatsApp sharing.",
       "summary": "Mobile app for tracking handyman advances and expenses by voice.",
       "category": "Finance",
-      "tags": ["Mobile", "Voice", "Expenses"]
+      "tags": ["Mobile", "Voice", "Expenses"],
+      "image": "projects/handytrack.jpg"
     },
     {
       "name": "Nivara",
@@ -309,7 +329,8 @@
       "category": "Healthcare",
       "tags": ["AI", "Healthcare", "Hospital", "AWS"],
       "url": "https://app.nivaracare.in/",
-      "urlLabel": "app.nivaracare.in"
+      "urlLabel": "app.nivaracare.in",
+      "image": "projects/nivara.jpg"
     },
     {
       "name": "Bluemind",
@@ -318,7 +339,8 @@
       "category": "AI",
       "tags": ["AI", "Environment", "Blockchain", "Mobile"],
       "url": "https://bluemind-web-vercel.app/",
-      "urlLabel": "bluemind-web-vercel.app"
+      "urlLabel": "bluemind-web-vercel.app",
+      "image": "projects/bluemind.jpg"
     },
     {
       "name": "Instamd",
@@ -327,7 +349,8 @@
       "category": "Healthcare",
       "tags": ["Healthcare", "Remote monitoring", "Claims", "AWS"],
       "url": "https://instamdinc.com/",
-      "urlLabel": "instamdinc.com"
+      "urlLabel": "instamdinc.com",
+      "image": "projects/instamd.jpg"
     }
   ],
   "why": [

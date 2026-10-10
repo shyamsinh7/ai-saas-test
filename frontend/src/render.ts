@@ -112,6 +112,9 @@ function renderPortfolio(profile: Profile): HTMLElement {
     const card = el(
       'article',
       { class: 'card project', 'data-category': p.category },
+      ...(p.image
+        ? [el('img', { src: p.image, alt: `${p.name} screenshot`, loading: 'lazy' })]
+        : []),
       el('h3', {}, p.name),
       el('span', { class: 'badge' }, p.category),
       el('p', { class: 'summary' }, p.summary),
