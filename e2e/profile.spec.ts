@@ -595,6 +595,18 @@ test.describe('loading and error states', () => {
     await expect(page.locator('.state-error')).toHaveCount(0);
   });
 
+  test('loading skeleton does not animate with reduced motion', async ({ page }) => {
+    await page.emulateMedia({ reducedMotion: 'reduce' });
+    await page.route('**/api/profile', async (route) => {
+      await new Promise((resolve) => setTimeout(resolve, 1500));
+      await route.continue();
+    });
+    await page.goto('./');
+    const skeleton = page.locator('.skeleton').first();
+    await expect(skeleton).toBeAttached();
+    await expect(skeleton).toHaveCSS('animation-name', 'none');
+  });
+
   test.describe('without JavaScript', () => {
     test.use({ javaScriptEnabled: false });
 
