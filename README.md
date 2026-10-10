@@ -112,6 +112,34 @@ pathname, the hash and any other params are preserved, so it works under a sub-p
 `/ai-saas-test/`. The URL is written only on filter clicks, never on load or table-of-contents
 clicks. The skills filter is not stored in the URL. Deep links need JavaScript (static hosting).
 
+## Design tokens
+
+All colours, type sizes, spacing, radii and shadows are named custom properties on `:root` in
+`frontend/src/style.css`; rules use `var(--token)` instead of hardcoded values.
+
+| Group      | Tokens                                                                                                  |
+| ---------- | ------------------------------------------------------------------------------------------------------- |
+| Colour     | `--bg`, `--surface`, `--surface-tint`, `--border`, `--text`, `--muted`, `--accent`, `--link`, badge/tag |
+| Type scale | `--fs-sm` … `--fs-h1`, `--lh-body`, `--lh-tight`, `--measure` (paragraph line length, 68ch)             |
+| Spacing    | `--space-1` … `--space-8` (4px base)                                                                    |
+| Radius     | `--radius-sm`, `--radius-md`, `--radius-pill`                                                           |
+| Shadow     | `--shadow-sm`, `--shadow-md`                                                                            |
+
+The system font stack is kept; no web fonts, icon libraries or external assets are loaded, so the
+site works under a GitHub Pages sub-path.
+
+Rules kept when changing tokens (`frontend/src/tokens.test.ts` checks the colour pairs):
+
+- Normal text is at least 4.5:1 against its background (badge `#0b3d63` on `#e3f0f9` is about 9:1,
+  tag `#333` on `#eef1f4` about 11:1); large text and UI components are at least 3:1.
+- The keyboard focus ring is a dark 3px outline (`--focus-ring`) with a white halo
+  (`--focus-ring-halo`), at least 3:1 on light, tinted and dark surfaces.
+- The selected filter state is not shown by colour alone (bold, underline, check mark).
+- Interactive targets are at least 44px; there is no horizontal scroll at 360px.
+- Under `prefers-reduced-motion: reduce`, smooth scrolling, transitions and animations are off.
+  Any new transition must be covered by that block.
+- Elements with the `hidden` attribute stay hidden (keep the `[hidden]` overrides).
+
 ## npm scripts
 
 | Script              | What it does                                                             |

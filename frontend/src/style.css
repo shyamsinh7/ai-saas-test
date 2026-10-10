@@ -1,16 +1,62 @@
 :root {
-  --accent: #1a74b0;
-  --link: #0b4a85;
+  /* Colour. Contrast: #0b3d63 on #e3f0f9 is about 9:1; #333 on #eef1f4 is about 11:1 (AA needs 4.5:1). */
+  --bg: #f5fafd;
+  --surface: #fff;
+  --surface-tint: #eef1f4;
+  --selected-bg: #eef2ff;
+  --border: #d6e6f0;
   --text: #333;
   --muted: #555;
+  --accent: #1a74b0;
+  --link: #0b4a85;
+  --on-link: #fff;
+  --badge-bg: #e3f0f9;
+  --badge-text: #0b3d63;
+  --tag-bg: #eef1f4;
+  --tag-text: #333;
+  --focus-ring: #0b3d63;
+  --focus-ring-halo: #fff;
+
+  /* Type scale */
+  --font-sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --fs-xs: 0.8125rem;
+  --fs-sm: 0.875rem;
+  --fs-base: 1rem;
+  --fs-lg: 1.25rem;
+  --fs-xl: 1.5rem;
+  --fs-h2: 1.5rem;
+  --fs-h1: clamp(1.9rem, 6vw, 2.5rem);
+  --lh-body: 1.6;
+  --lh-tight: 1.25;
+  --measure: 68ch;
+
+  /* Spacing (4px base) */
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.5rem;
+  --space-6: 2rem;
+  --space-7: 3rem;
+  --space-8: 4.5rem;
+
+  /* Radius */
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-pill: 999px;
+
+  /* Shadow */
+  --shadow-sm: 0 1px 2px rgb(0 0 0 / 12%);
+  --shadow-md: 0 2px 6px rgb(0 0 0 / 25%);
 }
 
 body {
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  font-family: var(--font-sans);
   margin: 0;
-  line-height: 1.6;
+  line-height: var(--lh-body);
+  font-size: var(--fs-base);
   color: var(--text);
-  background: #f5fafd;
+  background: var(--bg);
 }
 
 main,
@@ -19,66 +65,75 @@ header,
 footer {
   max-width: 960px;
   margin: 0 auto;
-  padding: 0 1rem;
+  padding: 0 var(--space-4);
 }
 
 header {
-  padding-top: 3rem;
-  padding-bottom: 1.5rem;
+  padding-top: var(--space-7);
+  padding-bottom: var(--space-5);
   border-bottom: 3px solid var(--accent);
 }
 
 .toc {
-  padding-top: 0.75rem;
-  padding-bottom: 0.25rem;
+  padding-top: var(--space-3);
+  padding-bottom: var(--space-1);
 }
 
 .toc ul {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.5rem;
+  gap: var(--space-2);
   margin: 0;
 }
 
 .toc a {
   display: inline-block;
-  padding: 0.25rem 0.75rem;
+  padding: var(--space-1) var(--space-3);
   border: 1px solid var(--accent);
-  border-radius: 999px;
+  border-radius: var(--radius-pill);
 }
 
 h1 {
   margin: 0;
-  font-size: clamp(1.9rem, 6vw, 2.5rem);
+  font-size: var(--fs-h1);
+  line-height: var(--lh-tight);
   color: var(--accent);
 }
 
 .role {
-  margin: 0.25rem 0 1rem;
-  font-size: 1.25rem;
+  margin: var(--space-1) 0 var(--space-4);
+  font-size: var(--fs-lg);
   color: var(--muted);
 }
 
 h2 {
   color: var(--accent);
-  margin-top: 2.5rem;
+  margin-top: var(--space-6);
+  font-size: var(--fs-h2);
+  line-height: var(--lh-tight);
 }
 
 a {
   color: var(--link);
 }
 
-a:focus-visible {
-  outline: 3px solid #f5a623;
+/* Two-layer ring: dark outline plus white halo, visible on light, tinted and dark surfaces. */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+.filter-btn:focus-visible,
+.back-to-top:focus-visible {
+  outline: 3px solid var(--focus-ring);
   outline-offset: 2px;
+  box-shadow: 0 0 0 5px var(--focus-ring-halo);
 }
 
 .skip-link {
   position: absolute;
   left: -999px;
   top: 0;
-  background: #fff;
-  padding: 0.5rem 1rem;
+  background: var(--surface);
+  padding: var(--space-2) var(--space-4);
   z-index: 10;
 }
 
@@ -92,47 +147,51 @@ ul.plain {
 }
 
 .contact li {
-  margin: 0.25rem 0;
+  margin: var(--space-1) 0;
   overflow-wrap: anywhere;
 }
 
 .grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(min(220px, 100%), 1fr));
-  gap: 1rem;
+  gap: var(--space-4);
 }
 
 .card {
-  background: #fff;
-  border: 1px solid #d6e6f0;
-  border-radius: 8px;
-  padding: 1rem;
+  min-width: 0;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-sm);
+  padding: var(--space-4);
 }
 
 .card h3 {
-  margin: 0 0 0.5rem;
-  font-size: 1rem;
+  margin: 0 0 var(--space-2);
+  font-size: var(--fs-base);
+  line-height: var(--lh-tight);
 }
 
 .card ul {
   margin: 0;
-  padding-left: 1.1rem;
+  padding-left: var(--space-5);
 }
 
 .project img {
   display: block;
   width: 100%;
+  max-width: 100%;
   height: 160px;
-  margin: 0 0 0.75rem;
-  border: 1px solid #d6e6f0;
-  border-radius: 4px;
+  margin: 0 0 var(--space-3);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
   object-fit: cover;
   object-position: top;
-  background: #eef1f4;
+  background: var(--surface-tint);
 }
 
 .project h3 {
-  margin: 0 0 0.25rem;
+  margin: 0 0 var(--space-1);
   color: var(--accent);
 }
 
@@ -147,19 +206,19 @@ ul.plain {
 }
 
 .project p {
-  margin: 0 0 0.5rem;
+  max-width: var(--measure);
+  margin: 0 0 var(--space-2);
 }
 
-/* Contrast: #0b3d63 on #e3f0f9 is about 9:1; #333 on #eef1f4 is about 11:1 (AA needs 4.5:1). */
 .project .badge {
   display: inline-block;
   max-width: 100%;
-  margin: 0 0 0.5rem;
+  margin: 0 0 var(--space-2);
   padding: 0.1rem 0.6rem;
-  border-radius: 999px;
-  background: #e3f0f9;
-  color: #0b3d63;
-  font-size: 0.8125rem;
+  border-radius: var(--radius-pill);
+  background: var(--badge-bg);
+  color: var(--badge-text);
+  font-size: var(--fs-xs);
   font-weight: 600;
   overflow-wrap: anywhere;
 }
@@ -168,26 +227,26 @@ ul.plain {
   display: flex;
   flex-wrap: wrap;
   gap: 0.35rem;
-  margin: 0 0 0.5rem;
+  margin: 0 0 var(--space-2);
   padding: 0;
   list-style: none;
 }
 
 .tags li {
   min-width: 0;
-  padding: 0.1rem 0.5rem;
-  border-radius: 4px;
-  background: #eef1f4;
-  color: #333;
-  font-size: 0.8125rem;
+  padding: 0.1rem var(--space-2);
+  border-radius: var(--radius-sm);
+  background: var(--tag-bg);
+  color: var(--tag-text);
+  font-size: var(--fs-xs);
   overflow-wrap: anywhere;
 }
 
 footer {
-  margin-top: 3rem;
-  padding-bottom: 4.5rem; /* room so the back-to-top button never covers the footer */
-  color: #666;
-  font-size: 0.875rem;
+  margin-top: var(--space-7);
+  padding-bottom: var(--space-8); /* room so the back-to-top button never covers the footer */
+  color: var(--muted);
+  font-size: var(--fs-sm);
 }
 
 footer .updated {
@@ -204,16 +263,16 @@ h1:focus {
 
 .back-to-top {
   position: fixed;
-  right: 1rem;
-  bottom: 1rem;
-  padding: 0.5rem 0.9rem;
+  right: var(--space-4);
+  bottom: var(--space-4);
+  padding: var(--space-2) 0.9rem;
   font: inherit;
-  font-size: 0.875rem;
-  color: #fff;
+  font-size: var(--fs-sm);
+  color: var(--on-link);
   background: var(--link);
   border: 0;
-  border-radius: 999px;
-  box-shadow: 0 2px 6px rgb(0 0 0 / 25%);
+  border-radius: var(--radius-pill);
+  box-shadow: var(--shadow-md);
   cursor: pointer;
 }
 
@@ -221,24 +280,23 @@ h1:focus {
   display: none;
 }
 
-.back-to-top:focus-visible {
-  outline: 3px solid #000;
-  outline-offset: 2px;
-}
-
 @media (prefers-reduced-motion: reduce) {
-  * {
+  *,
+  *::before,
+  *::after {
     scroll-behavior: auto !important;
+    transition: none !important;
+    animation: none !important;
   }
 }
 
 .skills-filter {
-  margin-bottom: 1rem;
+  margin-bottom: var(--space-4);
 }
 
 .skills-filter label {
   display: block;
-  margin-bottom: 0.25rem;
+  margin-bottom: var(--space-1);
   font-weight: 600;
 }
 
@@ -246,14 +304,14 @@ h1:focus {
   box-sizing: border-box;
   width: 100%;
   max-width: 24rem;
-  padding: 0.5rem 0.75rem;
+  padding: var(--space-2) var(--space-3);
   border: 1px solid currentColor;
-  border-radius: 4px;
+  border-radius: var(--radius-sm);
   font: inherit;
 }
 
 .skills-empty {
-  margin: 0 0 1rem;
+  margin: 0 0 var(--space-4);
 }
 
 .card[hidden],
@@ -265,30 +323,25 @@ h1:focus {
 .portfolio-filter {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.5rem;
-  margin-bottom: 0.75rem;
+  gap: var(--space-2);
+  margin-bottom: var(--space-3);
 }
 
 .filter-btn {
   min-height: 44px;
   min-width: 44px;
-  padding: 0.5rem 1rem;
+  padding: var(--space-2) var(--space-4);
   font: inherit;
   color: inherit;
-  background: #fff;
+  background: var(--surface);
   border: 2px solid currentColor;
-  border-radius: 999px;
+  border-radius: var(--radius-pill);
   cursor: pointer;
-}
-
-.filter-btn:focus-visible {
-  outline: 3px solid #f5a623;
-  outline-offset: 2px;
 }
 
 .filter-btn[aria-pressed='true'] {
   font-weight: 700;
-  background: #eef2ff;
+  background: var(--selected-bg);
   text-decoration: underline;
   text-underline-offset: 4px;
   border-width: 3px;
@@ -299,5 +352,5 @@ h1:focus {
 }
 
 .portfolio-status {
-  margin: 0 0 1rem;
+  margin: 0 0 var(--space-4);
 }
