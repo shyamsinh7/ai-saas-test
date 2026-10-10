@@ -92,7 +92,7 @@ button per category found in the data (first-seen order, never an empty category
 (or pressing Enter/Space on it) shows only that category's projects; the others get the `hidden`
 attribute and are never removed. The active button has `aria-pressed="true"` and a checkmark and
 underline, so it is not shown by colour alone. A polite live region (`role="status"`) reports e.g.
-"Showing 5 of 19 projects"; focus does not move. The section heading keeps the total. Without
+"Showing 5 of 23 projects"; focus does not move. The section heading keeps the total. Without
 JavaScript every card stays visible. No row is rendered when there are no projects.
 
 ### `?category=` URL parameter
