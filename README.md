@@ -91,6 +91,10 @@ message is announced politely (`aria-live`). Clearing the box, or entering only 
 everything again. Items are hidden with the `hidden` attribute, never removed, and the filter runs
 in the browser in both API and bundled-data modes.
 
+The search box is at least 44px tall with a strong border and a visible focus ring. The empty
+message is a tinted, dashed-border block, and hidden cards use `display: none` so they take no
+grid space.
+
 ## Portfolio category filter
 
 A row of buttons (`frontend/src/portfolioFilter.ts`) above the portfolio cards shows "All" plus one
