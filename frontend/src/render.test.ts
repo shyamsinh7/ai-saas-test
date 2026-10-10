@@ -180,6 +180,15 @@ describe('renderProfile', () => {
     expect(root.querySelector('footer .copyright')?.textContent).toBe('© 2030 Shyamsinh Parmar');
   });
 
+  it('renders Get in Touch without any anchor when no mailto or github contact has a url', () => {
+    renderProfile(root, {
+      ...data,
+      contacts: data.contacts.map((c) => ({ label: c.label, value: c.value })),
+    });
+    expect(root.querySelector('#links-h')?.textContent).toBe('Get in Touch');
+    expect(root.querySelector('#links a')).toBeNull();
+  });
+
   it('labels each section by its heading and offers a skip link', () => {
     for (const id of ['about', 'skills', 'portfolio', 'why', 'links']) {
       const section = root.querySelector(`#${id}`)!;
