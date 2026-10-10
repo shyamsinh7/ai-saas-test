@@ -255,7 +255,10 @@ describe('skills filter markup', () => {
     const input = section.querySelector('input#skills-filter-input')!;
     const grid = section.querySelector('.grid')!;
     expect(input.compareDocumentPosition(grid) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
-    expect(section.querySelector('#skills-empty')!.hasAttribute('hidden')).toBe(true);
+    const empty = section.querySelector('#skills-empty')!;
+    expect(empty.hasAttribute('hidden')).toBe(true);
+    expect(empty.getAttribute('role')).toBe('status');
+    expect(empty.getAttribute('aria-live')).toBe('polite');
     expect(section.querySelectorAll('.card')).toHaveLength(10);
     expect(section.querySelectorAll('.card[hidden]')).toHaveLength(0);
   });

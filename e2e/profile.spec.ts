@@ -293,12 +293,57 @@ test.describe('skills filter', () => {
     const skills = page.locator('#skills');
     const input = skills.getByLabel('Filter skills');
     await input.fill('zzzz');
-    await expect(skills.getByText('No skills match')).toBeVisible();
+    const empty = skills.locator('#skills-empty');
+    await expect(empty).toBeVisible();
+    await expect(empty).toHaveAttribute('role', 'status');
+    expect(await empty.evaluate((e) => getComputedStyle(e).backgroundColor)).not.toBe(
+      'rgba(0, 0, 0, 0)',
+    );
     await expect(skills.locator('.card').first()).toBeHidden();
     await input.fill('');
-    await expect(skills.getByText('No skills match')).toBeHidden();
+    await expect(empty).toBeHidden();
     for (const card of await skills.locator('.card').all()) await expect(card).toBeVisible();
   });
+
+  test('filter input is touch friendly with a visible label and focus state', async ({ page }) => {
+    const input = page.locator('#skills').getByLabel('Filter skills');
+    await expect(page.locator('#skills label[for="skills-filter-input"]')).toBeVisible();
+    const box = await input.boundingBox();
+    expect(box!.height).toBeGreaterThanOrEqual(44);
+    await input.focus();
+    expect(await input.evaluate((e) => getComputedStyle(e).outlineStyle)).not.toBe('none');
+  });
+
+  test('hidden cards occupy no space', async ({ page }) => {
+    const skills = page.locator('#skills');
+    await skills.getByLabel('Filter skills').fill('langchain');
+    const displays = await skills
+      .locator('.card')
+      .evaluateAll((els) => els.map((e) => getComputedStyle(e).display));
+    expect(displays.filter((d) => d !== 'none')).toHaveLength(1);
+  });
+
+  for (const [width, multi] of [
+    [1440, true],
+    [768, true],
+    [375, false],
+  ] as const) {
+    test(`skill cards form a balanced grid at ${width}px`, async ({ page }) => {
+      await page.setViewportSize({ width, height: 900 });
+      const cards = page.locator('#skills .card');
+      await expect(cards).toHaveCount(10);
+      const lefts = await cards.evaluateAll((els) =>
+        els.map((e) => Math.round(e.getBoundingClientRect().left)),
+      );
+      const columns = new Set(lefts).size;
+      if (multi) expect(columns).toBeGreaterThan(1);
+      else expect(columns).toBe(1);
+      const overflow = await page.evaluate(
+        () => document.documentElement.scrollWidth - document.documentElement.clientWidth,
+      );
+      expect(overflow).toBeLessThanOrEqual(0);
+    });
+  }
 
   test('TOC link still works while filtering', async ({ page }) => {
     await page.locator('#skills').getByLabel('Filter skills').fill('zzzz');
