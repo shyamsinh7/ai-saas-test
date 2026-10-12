@@ -659,14 +659,20 @@ test.describe('loading and error states', () => {
   });
 
   test('loading skeleton does not animate with reduced motion', async ({ page }) => {
-    await page.emulateMedia({ reducedMotion: 'reduce' });
-    await page.route('**/api/profile', async (route) => {
-      await new Promise((resolve) => setTimeout(resolve, 1500));
-      await route.continue();
-    });
+    // Static hosting makes no API request, so the loading view cannot be provoked by delaying one.
+    // Check the stylesheet rule itself on a skeleton block added to the rendered page.
     await page.goto('./');
-    const skeleton = page.locator('.skeleton').first();
-    await expect(skeleton).toBeAttached();
+    await expect(page.getByRole('heading', { level: 1 })).toBeVisible();
+    await page.evaluate(() => {
+      const block = document.createElement('div');
+      block.className = 'skeleton skeleton-wide';
+      block.id = 'test-skeleton';
+      document.body.append(block);
+    });
+    const skeleton = page.locator('#test-skeleton');
+    await page.emulateMedia({ reducedMotion: 'no-preference' });
+    await expect(skeleton).not.toHaveCSS('animation-name', 'none');
+    await page.emulateMedia({ reducedMotion: 'reduce' });
     await expect(skeleton).toHaveCSS('animation-name', 'none');
   });
 
