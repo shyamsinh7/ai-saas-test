@@ -68,6 +68,11 @@ field, or with an unparseable value on the frontend, the footer shows no date. T
 values that are not valid ISO dates, such as `2026-13-45`, so an invalid `updatedAt` makes
 `/api/profile` return HTTP 500.
 
+The footer sits under a thin top border, aligned with the page content width: the copyright and
+the date share one row on wide screens and stack on narrow phones. Links in Get in Touch share the
+global link style (underline, darker on hover, focus ring) and wrap when long; an entry without a
+URL is plain text, not a link.
+
 ## Table of contents
 
 A table of contents (`<nav aria-label="Table of contents">`) sits directly under the header with

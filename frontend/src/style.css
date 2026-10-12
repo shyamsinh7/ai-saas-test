@@ -177,6 +177,27 @@ main > section > ul:not(.plain):not(.tags) li + li {
 
 a {
   color: var(--link);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+a:hover {
+  color: var(--link-pressed);
+  text-decoration-thickness: 2px;
+}
+
+/* Safety net: an anchor without href is plain text, never link-styled */
+a:not([href]) {
+  color: inherit;
+  text-decoration: none;
+}
+
+#links p {
+  max-width: var(--measure);
+}
+
+#links a {
+  overflow-wrap: anywhere;
 }
 
 /* Two-layer ring: dark outline plus white halo, visible on light, tinted and dark surfaces. */
@@ -395,10 +416,18 @@ footer {
   ); /* room so the back-to-top button never covers the footer */
   color: var(--muted);
   font-size: var(--fs-sm);
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: var(--space-1) var(--space-4);
+  border-top: 1px solid var(--border);
+  padding-top: var(--space-4);
 }
 
+footer .copyright,
 footer .updated {
-  display: block;
+  min-width: 0;
+  overflow-wrap: anywhere;
 }
 
 html {

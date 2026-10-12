@@ -75,6 +75,69 @@ test('footer shows when the profile was last updated', async ({ page }) => {
   await expect(page.locator('footer .updated')).toHaveText('Last updated: 10 October 2026');
 });
 
+test('footer copyright and date are visible and aligned with the content width', async ({
+  page,
+}) => {
+  const copyright = page.locator('footer .copyright');
+  const updated = page.locator('footer .updated');
+  await expect(copyright).toBeVisible();
+  await expect(updated).toBeVisible();
+  await expect(copyright).toContainText('Shyamsinh Parmar');
+  const [main, footer, c] = await Promise.all([
+    page.locator('main').boundingBox(),
+    page.locator('footer').boundingBox(),
+    copyright.boundingBox(),
+  ]);
+  expect(footer!.x).toBe(main!.x);
+  expect(c!.x).toBe(
+    main!.x +
+      (await page.evaluate(() =>
+        parseFloat(getComputedStyle(document.querySelector('main')!).paddingLeft),
+      )),
+  );
+});
+
+test('Get in Touch links look like other links and show a focus ring', async ({ page }) => {
+  const link = page.locator('#links a').first();
+  await expect(link).toBeVisible();
+  const style = (l: typeof link) =>
+    l.evaluate((a) => {
+      const cs = getComputedStyle(a);
+      return { color: cs.color, line: cs.textDecorationLine };
+    });
+  const other = await style(page.locator('#portfolio a').first());
+  const mine = await style(link);
+  expect(mine.color).toBe(other.color);
+  expect(mine.line).toContain('underline');
+  await link.focus();
+  expect(await link.evaluate((a) => getComputedStyle(a).outlineStyle)).not.toBe('none');
+});
+
+for (const long of [false, true]) {
+  test(`Get in Touch and footer fit a 375px phone${long ? ' with a very long email' : ''}`, async ({
+    page,
+  }) => {
+    await page.setViewportSize({ width: 375, height: 700 });
+    await expect(page.locator('#links a').first()).toBeVisible();
+    if (long) {
+      await page
+        .locator('#links a')
+        .first()
+        .evaluate((a) => (a.textContent = 'x'.repeat(120)));
+    }
+    const overflow = await page.evaluate(
+      () => document.documentElement.scrollWidth - document.documentElement.clientWidth,
+    );
+    expect(overflow).toBeLessThanOrEqual(0);
+    for (const sel of ['#links a', 'footer .copyright', 'footer .updated']) {
+      for (const el of await page.locator(sel).all()) {
+        const box = await el.boundingBox();
+        expect(box!.x + box!.width, sel).toBeLessThanOrEqual(375);
+      }
+    }
+  });
+}
+
 test('nothing of the greeting app remains', async ({ page }) => {
   await expect(page.getByLabel('Your name')).toHaveCount(0);
   await expect(page.getByRole('button', { name: 'Greet' })).toHaveCount(0);
