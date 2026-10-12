@@ -1,16 +1,5 @@
 import './style.css';
-import { loadProfile } from './data';
-import { renderProfile } from './render';
-import { initBackToTop } from './backToTop';
-import { initSkillsFilter } from './skillsFilter';
-import { initPortfolioFilter } from './portfolioFilter';
+import { startApp } from './bootstrap';
 
 const root = document.getElementById('app');
-if (root) {
-  void loadProfile().then((profile) => {
-    renderProfile(root, profile);
-    initBackToTop();
-    initSkillsFilter();
-    initPortfolioFilter();
-  });
-}
+if (root) void startApp(root);

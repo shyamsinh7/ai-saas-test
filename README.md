@@ -124,6 +124,14 @@ pathname, the hash and any other params are preserved, so it works under a sub-p
 `/ai-saas-test/`. The URL is written only on filter clicks, never on load or table-of-contents
 clicks. The skills filter is not stored in the URL. Deep links need JavaScript (static hosting).
 
+## Loading and error states
+
+`frontend/src/bootstrap.ts` (`startApp`) runs the page entry flow.
+
+- **Loading:** if the profile takes longer than 150 ms, a "Loading profile…" status (announced politely) with a skeleton is shown. Fast loads show no loading state, so nothing flickers. Under `prefers-reduced-motion` the skeleton is static.
+- **Error:** if loading or rendering fails, a generic message ("We couldn't load this profile") with a **Retry** button replaces the page. Technical details are only logged to the console. Retry ignores repeated clicks while a load is running, and on success the full profile replaces the message.
+- **Unchanged:** when the API is unavailable the bundled data is still rendered with no error; the `<noscript>` message is kept for visitors without JavaScript.
+
 ## Design tokens
 
 All colours, type sizes, spacing, radii and shadows are named custom properties on `:root` in
